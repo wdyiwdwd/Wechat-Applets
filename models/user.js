@@ -4,14 +4,9 @@ var Sequelize = require('sequelize');
 var db = require('./index').DB;
 
 // 创建 model
-var Test = db.define('test', {
-  name: {
+var User = db.define('user', {
+  wxid: {
     type: Sequelize.STRING, // 指定值的类型
-    field: 'name' // 指定存储在表中的键名称
-  },
-  // 没有指定 field，表中键名称则与对象键名相同，为 email
-  email: {
-    type: Sequelize.STRING
   }
 }, {
     // 如果为 true 则表的名称和 model 相同，即 user
@@ -24,6 +19,6 @@ var Test = db.define('test', {
 // User.sync() 会创建表并且返回一个Promise对象
 // 如果 force = true 则会把存在的表（如果users表已存在）先销毁再创建表
 // 默认情况下 forse = false
-var test = Test.sync({ force: false });
+User.sync({ force: false });
 
-module.exports = Test;
+module.exports = User;

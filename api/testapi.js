@@ -1,8 +1,9 @@
-var config = require('../config');
 var Test = require('../models').Test;
 
-exports.testapi = function(req, res) {
-	docu = new Test({name: 'testapi'})
-	docu.save();
+exports.testapi = async function(req, res) {
+  var test = await Test.create({
+    'name': 'Production',
+    'email': '@qq.com'
+  });
 	res.send('YES World');
 }

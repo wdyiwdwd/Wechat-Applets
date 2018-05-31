@@ -6,6 +6,8 @@
   "version": "",
   "dependencies": {
     "express": "^4.16.3",
-    "mongoose": "^5.1.0"
+    "mongoose": "^5.1.0",
+    "mysql2": "^1.5.3",
+    "sequelize": "^4.37.10"
   }
 }
