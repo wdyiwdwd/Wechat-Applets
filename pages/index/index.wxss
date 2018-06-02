@@ -16,6 +16,12 @@
   color: #aaa;
 }
 
-.usermotto {
-  margin-top: 200px;
+.initial {
+  width: 150px;
+  height: 150px;
+  margin-top: 10px;
+}
+
+.swiper {
+  width: 150px;
 }
