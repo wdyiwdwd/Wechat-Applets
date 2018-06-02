@@ -7,7 +7,36 @@ Page({
     motto: 'Hello World',
     userInfo: {},
     hasUserInfo: false,
-    canIUse: wx.canIUse('button.open-type.getUserInfo')
+    canIUse: wx.canIUse('button.open-type.getUserInfo'),
+    questions: [
+      {
+        question: '您的白酒酒量是：',
+        answers: {
+          a: '3两以下',
+          b: '3-5两',
+          c: '5两-1斤',
+          d: '1斤以上'
+        }
+      },
+      {
+        question: '您的红酒酒量是：',
+        answers: {
+          a: '3两以下',
+          b: '3-5两',
+          c: '5两-1斤',
+          d: '1斤以上'
+        }
+      },
+      {
+        question: '您的啤酒酒量是：',
+        answers: {
+          a: '3两以下',
+          b: '3-5两',
+          c: '5两-1斤',
+          d: '1斤以上'
+        }
+      }
+    ]
   },
   //事件处理函数
   bindViewTap: function() {

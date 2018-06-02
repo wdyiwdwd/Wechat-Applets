@@ -5,10 +5,24 @@
     <block wx:else>
       <image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" background-size="cover"></image>
       <text class="userinfo-nickname">{{userInfo.nickName}}</text>
+      <swiper class="swiper" indicator-dots="{{true}}">
+        <block wx:for="{{questions}}">
+          <swiper-item>
+            <view class="initial">
+              <text class="question">{{item.question}}</text>
+              <radio-group class="answers">
+                <radio value='a'>{{item.answers.a}}</radio>
+                <radio value='b'>{{item.answers.b}}</radio>
+                <radio value='c'>{{item.answers.c}}</radio>
+                <radio value='d'>{{item.answers.d}}</radio>
+              </radio-group>
+            </view>
+          </swiper-item>
+        </block>
+      </swiper>
     </block>
   </view>
-  <view class="usermotto">
-    <text class="user-motto">{{motto}}</text>
-    <button bindtap="testReq">req</button>
+  <view class="bottom">
+    <button bindtap="testReq">完成自评</button>
   </view>
 </view>
