@@ -1,0 +1,78 @@
+.userinfo-avatar {
+  /* display: inline-block; */
+  width: 100rpx;
+  height: 100rpx;
+  margin: 15rpx;
+  border-radius: 50%;
+}
+
+.title {
+  text-align: left;
+  width: 100%;
+}
+
+.list-title {
+  display: block;
+  width: 100%;
+  text-align: left;
+  font-size: 50rpx;
+  color: gray;
+  margin: 6% 10% 6% calc(10% + 15rpx);
+}
+
+.list-item {
+  margin-left: 10%;
+  width: 80%;
+  text-align: left;
+  padding-bottom: 12rpx; 
+  border-bottom: 1px rgb(219, 219, 219) solid;
+}
+
+.left-part {
+  width: 60%;
+  display: inline-flex; 
+  align-items: center; 
+}
+
+.list-name {
+  /* display: inline-block; */
+  /* margin: 10% 10% 10% 10%; */
+  margin-left: 7%;
+  color: gray; 
+}
+
+.list-more {
+  float: right;
+  width: 64rpx;
+  height: 24px;
+  margin-right:2%;
+  margin-top: 43rpx;
+}
+.back {
+  display: block;
+  position: absolute;
+  left: 10%;
+  bottom: 5%;
+  background-color: white;
+  color: gray;
+  font-size: 40rpx;
+}
+
+.back:hover {
+  text-decoration: underline;
+}
+
+.blog {
+  display: block;
+  position: absolute;
+  right: 12%;
+  bottom: 5%;
+  background-color: white;
+  color: gray;
+  font-size: 40rpx;
+}
+
+.scroll {
+  width: 100%;
+  height: 800rpx;
+}

@@ -75,6 +75,9 @@ Page({
   testReq: function () {
     var theUrl = "http://localhost:3000/"
     var that = this
+    wx.navigateTo({
+      url: '../list/list'
+    })
     wx.request({
       url: theUrl,
       data: '',

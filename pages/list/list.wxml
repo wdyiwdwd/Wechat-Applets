@@ -1,0 +1,20 @@
+<view class='container'>
+<view class='title'>
+  <text class="list-title">群友列表:</text>
+</view>
+<scroll-view scroll-y="true" class="scroll">
+<block wx:for="{{group}}">
+  <view class="list-item">
+    <view class="left-part">
+      <image class="userinfo-avatar" src="{{userInfo.avatarUrl}}" background-size="cover"></image>
+      <text class="list-name">{{item}}</text>
+    </view>
+    <image class="list-more" src='../static/more.png'></image>
+  </view>
+</block>
+</scroll-view>
+<view class="tile">
+  <text class="back" bindtap="returnIndex">酒量自估</text>
+  <text class="blog" >博客</text>
+</view>
+</view>
