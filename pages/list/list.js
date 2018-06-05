@@ -23,5 +23,10 @@ Page({
     wx.navigateTo({
       url: '../index/index',
     })
+  },
+  goBlog: function () {
+    wx.navigateTo({
+      url: '../blog/blog',
+    })
   }
 })

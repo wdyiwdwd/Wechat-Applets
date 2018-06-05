@@ -7,6 +7,8 @@ var app = express();
 
 app.use('/', router)
 
+app.use('/upload',express.static('upload'));
+
 var server = app.listen(config.port, function () {
  
   var host = server.address().address

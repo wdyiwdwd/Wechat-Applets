@@ -72,6 +72,10 @@
   font-size: 40rpx;
 }
 
+.blog:hover {
+  text-decoration: underline;
+}
+
 .scroll {
   width: 100%;
   height: 800rpx;

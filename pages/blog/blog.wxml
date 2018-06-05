@@ -1,0 +1,13 @@
+<view class="container">
+  <scroll-view scroll-y="true" class="scroll">
+  <block wx:for="{{pictures}}">
+    <view class="display-item">
+    <image src="{{item.path}}" class="pictures"></image>
+    <text class="introduce">{{item.text}}</text>
+    </view>
+  </block>
+  </scroll-view>
+  <view class="tile">
+    <image src='../static/add.png' class="add-img"></image>
+  </view>
+</view>

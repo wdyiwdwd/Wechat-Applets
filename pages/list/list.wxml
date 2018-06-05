@@ -15,6 +15,6 @@
 </scroll-view>
 <view class="tile">
   <text class="back" bindtap="returnIndex">酒量自估</text>
-  <text class="blog" >博客</text>
+  <text class="blog" bindtap="goBlog">博客</text>
 </view>
 </view>
