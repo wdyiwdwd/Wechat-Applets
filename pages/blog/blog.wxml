@@ -8,6 +8,11 @@
   </block>
   </scroll-view>
   <view class="tile">
-    <image src='../static/add.png' class="add-img"></image>
+    <image src='../static/add.png' class="add-img" bindtap='addPicture'></image>
+  </view>
+  <view hidden="{{!showCover}}" class="add-view">
+    <button bindtap='uploadPicture'>上传图片</button>
+    <textarea placeholder="请输入这张图的评论" auto-focus class="remark" bindinput="changeRemark"/>
+    <button bindtap='addRemark'>提交</button> 
   </view>
 </view>
