@@ -5,11 +5,11 @@ const app = getApp()
 Page({
   data: {
     motto: 'Hello World',
-    userInfo: {},
-    hasUserInfo: false,
-    canIUse: wx.canIUse('button.open-type.getUserInfo'),
+    current: 0,
+    isFirst: null,
     questions: [
       {
+        wine: '白酒',
         question: '您的白酒酒量是：',
         answers: {
           a: '3两以下',
@@ -19,6 +19,7 @@ Page({
         }
       },
       {
+        wine: '红酒',
         question: '您的红酒酒量是：',
         answers: {
           a: '3两以下',
@@ -28,6 +29,7 @@ Page({
         }
       },
       {
+        wine: '啤酒',
         question: '您的啤酒酒量是：',
         answers: {
           a: '3两以下',
@@ -36,7 +38,8 @@ Page({
           d: '1斤以上'
         }
       }
-    ]
+    ],
+    choosedAnswer: []
   },
   //事件处理函数
   bindViewTap: function() {
@@ -45,56 +48,105 @@ Page({
     })
   },
   onLoad: function () {
-    if (app.globalData.userInfo) {
+    if(app.globalData.isFirst) {
       this.setData({
-        userInfo: app.globalData.userInfo,
-        hasUserInfo: true
+        isFirst: app.globalData.isFirst
       })
-    } else if (this.data.canIUse){
-      // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
-      // 所以此处加入 callback 以防止这种情况
-      app.userInfoReadyCallback = res => {
-        this.setData({
-          userInfo: res.userInfo,
-          hasUserInfo: true
-        })
-      }
     } else {
-      // 在没有 open-type=getUserInfo 版本的兼容处理
-      wx.getUserInfo({
-        success: res => {
-          app.globalData.userInfo = res.userInfo
-          this.setData({
-            userInfo: res.userInfo,
-            hasUserInfo: true
-          })
-        }
-      })
-    }
-  },
-  testReq: function () {
-    var theUrl = "http://localhost:3000/"
-    var that = this
-    wx.request({
-      url: theUrl,
-      data: '',
-      method: 'get',
-      success: function (res) {
-        console.log(res.data)
-        that.setData({
-          motto: res.data
+      app.isFirstReadyCallback = res => {
+        this.setData({
+          isFirst: res.data.isFirst
         })
-      },
-      fail: function () {
       }
+    }
+    wx.showShareMenu({
+      withShareTicket: true
     })
   },
-  getUserInfo: function(e) {
-    console.log(e)
-    app.globalData.userInfo = e.detail.userInfo
+  onShareAppMessage: function(res) {
+    return {
+      //title:
+      //path: '/pages/logs/logs',
+      //imageUrl:
+      success: function(res) {
+        console.log(res.shareTickets[0]);
+        wx.getShareInfo({
+          shareTicket: res.shareTickets[0],
+          success: function (res) {
+            console.log(res);
+            var temp = res;
+            // 解密
+            wx.request({
+              url: 'http://localhost:3000/getGid',
+              data: {
+                appid: app.globalData.appid,
+                sessionKey: app.globalData.sessionKey,
+                encryptedData: temp.encryptedData,
+                iv: temp.iv
+              },
+              success: function (res) {
+                console.log(res.data);
+                app.globalData.openGId = res.data.openGId;
+                wx.request({
+                  url: 'http://localhost:3000/onShare',
+                  data: {
+                    wxid: app.globalData.openid,
+                    openGId: app.globalData.openGId
+                  },
+                  success: function (res) {
+                    console.log(res.data)
+                  },
+                  fail: function () {
+                    console.log("onShare error!")
+                  }
+                })
+              },
+              fail: function () {
+                console.log('getGid error!');
+              }
+            })
+          },
+          fail: function () {
+            console.log('shareInfo error!');
+          }
+        })
+      },
+      fail: function() {
+        console.log('share error!');
+      }
+    }
+  },
+  swiperChange: function(e) {
+    console.log(e.detail.current);
     this.setData({
-      userInfo: e.detail.userInfo,
-      hasUserInfo: true
+      current: e.detail.current
+    })
+  },
+  radioChange: function(e) {
+    console.log(this.data.current);
+    this.data.choosedAnswer[this.data.current]=e.detail.value;
+    console.log(this.data.choosedAnswer);
+  },
+  selfDone: function () {
+    var that=this;
+    var theUrl = "http://localhost:3000/selfInitial" 
+    wx.request({
+      url: theUrl,
+      data: {
+        wxid: app.globalData.openid,
+        openGId: app.globalData.openGId,
+        questions: that.data.questions,
+        choosedAnswer: that.data.choosedAnswer
+      },
+      success: function (res) {
+        console.log(res.data)
+      },
+      fail: function () {
+        console.log("selfDone error!")
+      }
+    })
+    that.setData({
+      isFirst: false
     })
   }
 })

@@ -7,6 +7,18 @@ var db = require('./index').DB;
 var User = db.define('user', {
   wxid: {
     type: Sequelize.STRING, // 指定值的类型
+  },
+  nickname: {
+    type: Sequelize.STRING,
+  },
+  avatar: {
+    type: Sequelize.STRING,
+  },
+  level: {
+    type: Sequelize.STRING,
+  },
+  motto: {
+    type: Sequelize.STRING,
   }
 }, {
     // 如果为 true 则表的名称和 model 相同，即 user

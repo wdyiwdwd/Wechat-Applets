@@ -1,39 +1,86 @@
 //app.js
-App({
-  onLaunch: function () {
-    // 展示本地存储能力
-    var logs = wx.getStorageSync('logs') || []
-    logs.unshift(Date.now())
-    wx.setStorageSync('logs', logs)
 
+App({
+  globalData: {
+    appid: 'wxb7be4acbca4aa702',
+    secret: '783aa7596ce1e457cf77c5b3e8ec81fe',
+    isFirst: null,
+    openid: null,
+    sessionKey: null,
+    openGId: null,
+  },
+  onLaunch: function (options) {
+    var that = this;
     // 登录
     wx.login({
-      success: res => {
-        // 发送 res.code 到后台换取 openId, sessionKey, unionId
-      }
-    })
-    // 获取用户信息
-    wx.getSetting({
-      success: res => {
-        if (res.authSetting['scope.userInfo']) {
-          // 已经授权，可以直接调用 getUserInfo 获取头像昵称，不会弹框
-          wx.getUserInfo({
-            success: res => {
-              // 可以将 res 发送给后台解码出 unionId
-              this.globalData.userInfo = res.userInfo
-
-              // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
-              // 所以此处加入 callback 以防止这种情况
-              if (this.userInfoReadyCallback) {
-                this.userInfoReadyCallback(res)
+      success: function(res) {
+        if(res.code) {
+          var apiurl = 'https://api.weixin.qq.com/sns/jscode2session?appid=' + that.globalData.appid + '&secret=' + that.globalData.secret + '&js_code=' + res.code + '&grant_type=authorization_code';
+          // 获取openid
+          wx.request({
+            url: apiurl,
+            success: function(res) {
+              console.log(res.data);
+              that.globalData.openid = res.data.openid;
+              that.globalData.sessionKey = res.data.session_key;
+              console.log(that.globalData.openid);
+              // 从群进入，获取群id
+              if (options.scene == 1044) {
+                wx.getShareInfo({
+                  shareTicket: options.shareTicket,
+                  success: function (res) {
+                    console.log(res);
+                    var temp = res;
+                    // 解密
+                    wx.request({
+                      url: 'http://localhost:3000/getGid',
+                      data: {
+                        appid: that.globalData.appid,
+                        sessionKey: that.globalData.sessionKey,
+                        encryptedData: temp.encryptedData,
+                        iv: temp.iv
+                      },
+                      success: function (res) {
+                        console.log(res.data);
+                        that.globalData.openGId = res.data.openGId;
+                      },
+                      fail: function () {
+                        console.log('getGid error!');
+                      }
+                    })
+                  },
+                  fail: function () {
+                    console.log('shareInfo error!');
+                  }
+                })
               }
+              //查看用户是否初次使用
+              wx.request({
+                url: 'http://localhost:3000/isFirst',
+                data: {
+                  openid: that.globalData.openid
+                },
+                success: function (res) {
+                  console.log(res.data.isFirst);
+                  that.globalData.isFirst = res.data.isFirst;
+                  // 确保页面渲染
+                  if (that.isFirstReadyCallback) {
+                    that.isFirstReadyCallback(res)
+                  }
+                },
+                fail: function () {
+                  console.log('isFirst error!');
+                }
+              })
+            },
+            fail: function() {
+              console.log('获取openid失败')
             }
           })
+        } else {
+          console.log('登录失败！'+res.errMsg)
         }
       }
     })
-  },
-  globalData: {
-    userInfo: null
-  }
+  }  
 })

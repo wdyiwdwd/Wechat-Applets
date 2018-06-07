@@ -1,28 +1,29 @@
 <!--index.wxml-->
-<view class="container">
+<view class="container" wx:if="{{isFirst}}">
   <view class="userinfo">
-    <button wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 获取头像昵称 </button>
-    <block wx:else>
-      <image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" background-size="cover"></image>
-      <text class="userinfo-nickname">{{userInfo.nickName}}</text>
-      <swiper class="swiper" indicator-dots="{{true}}">
-        <block wx:for="{{questions}}">
-          <swiper-item>
-            <view class="initial">
-              <text class="question">{{item.question}}</text>
-              <radio-group class="answers">
-                <radio value='a'>{{item.answers.a}}</radio>
-                <radio value='b'>{{item.answers.b}}</radio>
-                <radio value='c'>{{item.answers.c}}</radio>
-                <radio value='d'>{{item.answers.d}}</radio>
-              </radio-group>
-            </view>
-          </swiper-item>
-        </block>
-      </swiper>
+    <open-data type="userAvatarUrl" class="userinfo-avatar"></open-data>
+    <open-data type="userNickName" class="userinfo-nickname"></open-data>
+  </view>
+  <swiper class="swiper" indicator-dots="{{true}}" bindchange="swiperChange">
+    <block wx:for="{{questions}}">
+      <swiper-item>
+        <view class="initial">
+          <text class="question">{{item.question}}</text>
+          <radio-group class="answers" bindchange="radioChange">
+            <radio value="{{item.answers.a}}">{{item.answers.a}}</radio>
+            <radio value="{{item.answers.b}}">{{item.answers.b}}</radio>
+            <radio value="{{item.answers.c}}">{{item.answers.c}}</radio>
+            <radio value="{{item.answers.d}}">{{item.answers.d}}</radio>
+          </radio-group>
+        </view>
+      </swiper-item>
     </block>
-  </view>
+  </swiper>
   <view class="bottom">
-    <button bindtap="testReq">完成自评</button>
+    <button bindtap="selfDone">完成自评</button>
   </view>
+</view>
+<view wx:else>
+  <text>hhh</text>
+  <button open-type="share">转发到群</button>
 </view>
