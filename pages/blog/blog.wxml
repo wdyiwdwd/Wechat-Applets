@@ -4,6 +4,7 @@
     <view class="display-item">
     <image src="{{item.path}}" class="pictures"></image>
     <text class="introduce">{{item.text}}</text>
+    <text class="create-time">{{item.createdAt}}</text>
     </view>
   </block>
   </scroll-view>
