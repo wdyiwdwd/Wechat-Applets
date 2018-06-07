@@ -15,7 +15,7 @@ var User = db.define('user', {
     type: Sequelize.STRING,
   },
   level: {
-    type: Sequelize.STRING,
+    type: Sequelize.INTEGER,
   },
   motto: {
     type: Sequelize.STRING,

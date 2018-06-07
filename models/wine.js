@@ -7,7 +7,7 @@ var User = require('./user');
 // 创建 model
 var Wine = db.define('wine', {
   'type': {
-    type: Sequelize.STRING, // 指定值的类型
+    type: Sequelize.INTEGER, 
   },
   amount: {
     type: Sequelize.FLOAT,
@@ -16,7 +16,7 @@ var Wine = db.define('wine', {
     type: Sequelize.STRING,
   },
   answer: {
-    type: Sequelize.STRING,
+    type: Sequelize.INTEGER,
   }
 }, {
     // 如果为 true 则表的名称和 model 相同，即 user

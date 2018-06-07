@@ -4,11 +4,13 @@ var Group = require('../models').Group;
 var GroupUser = require('../models').GroupUser;
 
 exports.selfInitial = async function (req, res) {
-  console.log(req.query);
+  //console.log(req.query);
+  var choosedAnswer = JSON.parse(req.query.choosedAnswer);
   var user = await User.create({
     'wxid': req.query.wxid,
     'nickname': req.query.nickname,
-    'avatar': req.query.avatar
+    'avatar': req.query.avatar,
+    'level': Math.max.apply(null,choosedAnswer)
   })
   if(req.query.openGId!='null') {
     var groups = await Group.findAll({
@@ -25,12 +27,13 @@ exports.selfInitial = async function (req, res) {
       await groups[0].addUser(user);
     }
   }
-  var num = req.query.questions.length;
-  for(var i=0;i<3;i++) {
-    var wine = await user.createWine({
-      'type': req.query.questions[i].wine,
-      'answer': req.query.choosedAnswer[i],
-    })
+  for(var i=0;i<choosedAnswer.length;i++) {
+    if (choosedAnswer[i]!= undefined) {
+      var wine = await user.createWine({
+        'type': i,
+        'answer': choosedAnswer[i],
+      })
+    }
   }
   res.send('selfInitial success!');
 }

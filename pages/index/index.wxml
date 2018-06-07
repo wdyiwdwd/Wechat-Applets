@@ -10,10 +10,10 @@
         <view class="initial">
           <text class="question">{{item.question}}</text>
           <radio-group class="answers" bindchange="radioChange">
-            <radio value="{{item.answers.a}}">{{item.answers.a}}</radio>
-            <radio value="{{item.answers.b}}">{{item.answers.b}}</radio>
-            <radio value="{{item.answers.c}}">{{item.answers.c}}</radio>
-            <radio value="{{item.answers.d}}">{{item.answers.d}}</radio>
+            <radio value="0">{{item.answers[0]}}</radio>
+            <radio value="1">{{item.answers[1]}}</radio>
+            <radio value="2">{{item.answers[2]}}</radio>
+            <radio value="3">{{item.answers[3]}}</radio>
           </radio-group>
         </view>
       </swiper-item>
@@ -25,6 +25,9 @@
   </view>
 </view>
 <view wx:else>
-  <text>hhh</text>
-  <button open-type="share">转发到群</button>
+  <view wx:if="{{isFirst==null}}"></view>
+  <view wx:else>
+    <text>hhh</text>
+    <button open-type="share">转发到群</button>
+  </view>
 </view>
