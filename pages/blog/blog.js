@@ -1,4 +1,5 @@
 var config = require('../config');
+var utils = require("../../utils/util.js")
 //获取应用实例
 const app = getApp()
 
@@ -7,7 +8,7 @@ Page({
     pictures: [],
     showCover: false,
     userid: app.globalData.openid,
-    groupid: '1',
+    groupid: app.globalData.openGId,
     hasUpload: false,
     newPicture: {},
     remark: '',
@@ -15,6 +16,10 @@ Page({
   },
   onLoad: function () {
     var that = this;
+    this.setData({
+      userid: app.globalData.openid,
+      groupid: app.globalData.openGId
+    })
     wx.request({
       url: config.host + '/pictures',
       dataType: 'json',
@@ -24,7 +29,7 @@ Page({
         console.log(res.data)
         res.data.forEach(function(item) {
           item.path = config.host + item.path
-          item.createdAt = item.createdAt.substr(0, 10)
+          item.createdAt = utils.formatDBTime(item.createdAt)
         })
         that.setData({
           pictures: res.data
@@ -121,7 +126,7 @@ Page({
         method: 'post',
         success: function (res) {
           console.log(res.data)
-          res.data.createdAt = res.data.createdAt.substr(0,10);
+          res.data.createdAt = utils.formatDBTime(res.data.createdAt)
           that.data.pictures.splice(0, 0, res.data);
           that.setData({
             pictures: that.data.pictures,

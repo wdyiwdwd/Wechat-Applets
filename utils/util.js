@@ -14,6 +14,11 @@ const formatNumber = n => {
   return n[1] ? n : '0' + n
 }
 
+const formatDBTime = time => {
+  return time.substr(0, 10)
+}
+
 module.exports = {
-  formatTime: formatTime
+  formatTime: formatTime,
+  formatDBTime: formatDBTime
 }

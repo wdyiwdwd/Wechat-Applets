@@ -22,3 +22,10 @@
   height: 200rpx;
   width: 100%;
 }
+
+.comment-avatar {
+  width: 100rpx;
+  height: 100rpx;
+  margin: 15rpx;
+  border-radius: 50%;
+}

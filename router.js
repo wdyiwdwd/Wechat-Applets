@@ -7,6 +7,7 @@ var onShare = require('./api/onShare');
 var blog = require('./api/blog');
 var comment = require('./api/comment');
 var group = require('./api/group');
+var user = require('./api/user');
 var router = express.Router();
 
 router.get('/', test.testapi);
@@ -14,7 +15,7 @@ router.get('/selfInitial', selfInitial.selfInitial);
 router.get('/isFirst', isFirst.isFirst);
 router.get('/getGid', getGid.getGid);
 router.get('/onShare', onShare.onShare);
-
+router.get('/getuser', user.getUser)
 router.get('/getusers', group.getUsers)
 
 router.get('/pictures', blog.getPictures)

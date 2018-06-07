@@ -2,7 +2,7 @@
   <scroll-view scroll-y="true" class="scroll">
   <block wx:for="{{comments}}">
     <view class="display-item">
-    <image src="{{item.avatar}}" class="pictures"></image>
+    <image src="{{item.avatar}}" class="comment-avatar"></image>
     <text class="introduce">{{"+" + item.content}}</text>
     <text class="create-time">{{"——" + item.createdAt}}</text>
     </view>
@@ -12,7 +12,6 @@
     <image src='../static/add.png' class="add-img" bindtap='showAddModal'></image>
   </view>
   <view hidden="{{!showCover}}" class="add-view">
-    <textarea placeholder="请输入评论" auto-focus class="comment" bindinput="changeComment"/>
-    <button bindtap='addComment'>提交</button> 
+    <textarea placeholder="请输如您对这位酒友的评论：" focus='{{textFocus}}' class="comment-imput" bindinput="changeComment" bindconfirm='addComment' show-confirm-bar bindblur="addComment"/>
   </view>
 </view>

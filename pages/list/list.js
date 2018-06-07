@@ -11,7 +11,7 @@ Page({
     ],
   },
   onLoad: function () {
-    console.log(app.globalData.userInfo);
+    console.log(app.globalData.openGId);
     var that = this;
     this.setData({
       openid: app.globalData.openid,
