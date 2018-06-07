@@ -1,4 +1,13 @@
 <view>
+  <scroll-view scroll-y="true" class="scroll">
+  <block wx:for="{{comments}}">
+    <view class="display-item">
+    <image src="{{item.avatar}}" class="pictures"></image>
+    <text class="introduce">{{"+" + item.content}}</text>
+    <text class="create-time">{{"——" + item.createdAt}}</text>
+    </view>
+  </block>
+  </scroll-view>
   <view class="tile">
     <image src='../static/add.png' class="add-img" bindtap='showAddModal'></image>
   </view>
