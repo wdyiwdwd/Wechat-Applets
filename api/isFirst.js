@@ -8,7 +8,15 @@ exports.isFirst = async function (req, res) {
   });
   //console.log(users);
   var isFirst=(users.length===0);
-  res.send({
-    isFirst: isFirst
-  })
+  if(!isFirst) {
+    res.send({
+      isFirst: isFirst,
+      nickname: users[0].nickname,
+      avatar: users[0].avatar
+    })
+  } else {
+    res.send({
+      isFirst: isFirst
+    })
+  }
 }
