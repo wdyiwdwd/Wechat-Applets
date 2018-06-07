@@ -6,7 +6,9 @@ var GroupUser = require('../models').GroupUser;
 exports.selfInitial = async function (req, res) {
   console.log(req.query);
   var user = await User.create({
-    'wxid': req.query.wxid
+    'wxid': req.query.wxid,
+    'nickname': req.query.nickname,
+    'avatar': req.query.avatar
   })
   if(req.query.openGId!='null') {
     var groups = await Group.findAll({
