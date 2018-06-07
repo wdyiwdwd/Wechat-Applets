@@ -1,0 +1,9 @@
+<view>
+  <view class="tile">
+    <image src='../static/add.png' class="add-img" bindtap='showAddModal'></image>
+  </view>
+  <view hidden="{{!showCover}}" class="add-view">
+    <textarea placeholder="请输入评论" auto-focus class="comment" bindinput="changeComment"/>
+    <button bindtap='addComment'>提交</button> 
+  </view>
+</view>

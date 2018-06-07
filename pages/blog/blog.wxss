@@ -1,0 +1,55 @@
+.tile {
+  position: absolute;
+  display: block;
+  width: 100%;
+  bottom: 5%;
+  text-align: center;
+}
+.add-img {
+  width: 130rpx;
+  height: 130rpx;
+}
+
+.scroll {
+  height: 930rpx;
+}
+
+.display-item {
+  width:80%;
+  margin: 3% 10% 3% 10%;
+}
+
+.pictures {
+  width: 100%;
+  height: 370rpx;
+  -moz-box-shadow:2px 0px 4px #7A7A7A;
+  -webkit-box-shadow:2px 0px 4px #7A7A7A;
+  box-shadow:2px 0px 4px #7A7A7A;
+}
+
+.introduce {
+  display: block;
+  color: rgb(183, 183, 183);
+}
+
+ .add-view {
+  height: 400rpx;
+  position: absolute;
+  width: 80%;
+  bottom: 240rpx;
+} 
+
+.remark {
+  background-color: white;
+  height: 200rpx;
+  width: 100%;
+}
+
+.create-time {
+  display: block;
+  float: right;
+  font-size: 30rpx;
+  color: rgb(144, 144, 144);
+  margin-bottom: 30rpx;
+  height: 35rpx;
+}
