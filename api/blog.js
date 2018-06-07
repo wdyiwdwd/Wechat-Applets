@@ -13,7 +13,11 @@ exports.getPictures = async function (req, res) {
     }
   }).then(function (group) {
     group.getPictures({
-      where:{}
+      where:{},
+      order: [
+      ['createdAt', 'DESC'],
+      ['id']
+      ]
     }).then(function(pictures) {
       // console.log(pictures);
       res.send(pictures);
@@ -83,7 +87,9 @@ exports.addRemark = async function (req, res) {
         }
       }
     ).then(function(picture){
-      res.send(picture);
+      Picture.findOne({where:{'id': fields.pictureId}}).then(function(picture){
+        res.send(picture);
+      })
     });
   })
 }

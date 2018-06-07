@@ -1,13 +1,17 @@
 var config = require('../config');
+//获取应用实例
+const app = getApp()
 
 Page({
   data: {
     pictures: [],
     showCover: false,
+    userid: app.globalData.openid,
     groupid: '1',
     hasUpload: false,
     newPicture: {},
-    remark: ''
+    remark: '',
+    textFocus: false,
   },
   onLoad: function () {
     var that = this;
@@ -20,6 +24,7 @@ Page({
         console.log(res.data)
         res.data.forEach(function(item) {
           item.path = config.host + item.path
+          item.createdAt = item.createdAt.substr(0, 10)
         })
         that.setData({
           pictures: res.data
@@ -32,12 +37,6 @@ Page({
   changeRemark(event) {
     this.setData({
       remark: event.detail.value
-    })
-  },
-  addPicture() {
-    var that = this;
-    this.setData({
-      showCover: !(that.data.showCover)
     })
   },
   uploadPicture() {
@@ -79,8 +78,10 @@ Page({
               // to do
               that.setData({
                 hasUpload: true,
-                newPicture: JSON.parse(res.data)
-              });
+                showCover: true,
+                newPicture: JSON.parse(res.data),
+                textFocus: true
+              })
               console.log(that.data.newPicture);
             },
             fail: function (res) {
@@ -120,11 +121,15 @@ Page({
         method: 'post',
         success: function (res) {
           console.log(res.data)
-          that.data.pictures.push(res.data);
+          res.data.createdAt = res.data.createdAt.substr(0,10);
+          that.data.pictures.splice(0, 0, res.data);
           that.setData({
-            pictures: that.data.pictures
+            pictures: that.data.pictures,
+            remark: '',
+            showCover: false,
+            hasUpload: false,
+            textFocus: false
           })
-          that.addPicture();
         },
         fail: function () {
         }

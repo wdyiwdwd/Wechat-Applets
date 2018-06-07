@@ -26,4 +26,7 @@
 <view wx:else>
   <text>hhh</text>
   <button open-type="share">转发到群</button>
+  <button bindtap='goBlog'>去照片</button>
+  <button bindtap='goList'>去群里</button>
+  <button bindtap='goComment'>去评论</button>
 </view>

@@ -148,5 +148,20 @@ Page({
     that.setData({
       isFirst: false
     })
+  },
+  goBlog: function() {
+    wx.navigateTo({
+      url: '../blog/blog',
+    })
+  },
+  goList: function () {
+    wx.navigateTo({
+      url: '../list/list',
+    })
+  },
+  goComment: function () {
+    wx.navigateTo({
+      url: '../comment/comment',
+    })
   }
 })

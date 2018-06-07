@@ -4,16 +4,14 @@
     <view class="display-item">
     <image src="{{item.path}}" class="pictures"></image>
     <text class="introduce">{{item.text}}</text>
-    <text class="create-time">{{item.createdAt}}</text>
+    <text class="create-time">{{"——" + item.createdAt}}</text>
     </view>
   </block>
   </scroll-view>
   <view class="tile">
-    <image src='../static/add.png' class="add-img" bindtap='addPicture'></image>
+    <image src='../static/add.png' class="add-img" bindtap='uploadPicture'></image>
   </view>
   <view hidden="{{!showCover}}" class="add-view">
-    <button bindtap='uploadPicture'>上传图片</button>
-    <textarea placeholder="请输入这张图的评论" auto-focus class="remark" bindinput="changeRemark"/>
-    <button bindtap='addRemark'>提交</button> 
+    <textarea placeholder="请输入这张图的评论" focus='{{textFocus}}' class="remark" bindinput="changeRemark" bindconfirm='addRemark' show-confirm-bar bindblur="addRemark"/>
   </view>
 </view>
