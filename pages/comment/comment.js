@@ -1,4 +1,6 @@
 var config = require('../config');
+//获取应用实例
+const app = getApp()
 
 Page({
   data: {
@@ -6,14 +8,37 @@ Page({
     comments: [],
     groupid: '1',
     comment: '',
-    toid: '1',
+    toid: '',
     userid: '2'
   },
-  onLoad: function () {
+  onLoad: function (options) {
+    var that = this;
+    this.setData({
+      toid: options.toid,
+      groupid: app.globalData.openGId,
+      userid: app.globalData.openid,
+    }) 
+    console.log(options.toid);
+    wx.request({
+      url: config.host + '/getcomments',
+      data: {
+        toid: options.toid,
+        groupid: app.globalData.openGId,
+      },
+      method: 'GET',
+      dataType: 'json',
+      success: function(res) {
+        that.setData({
+          comments: res.data
+        })
+        console.log(that.data.comments);
+      },
+      fail: function(res) {},
+    })
   },
   showAddModal: function() {
      this.setData({
-       showCover: !this.data.showCover
+       showCover: !this.data.showCover,
      }) 
   },
   changeComment(event) {

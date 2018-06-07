@@ -19,6 +19,8 @@ router.get('/getusers', group.getUsers)
 
 router.get('/pictures', blog.getPictures)
 
+router.get('/getcomments', comment.getComments)
+
 router.post('/uploadpicture', blog.uploadPicture)
 
 router.post('/addremark', blog.addRemark)

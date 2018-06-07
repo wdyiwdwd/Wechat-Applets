@@ -44,9 +44,10 @@
 .list-more {
   float: right;
   width: 64rpx;
-  height: 24px;
+  height: 30px;
   margin-right:2%;
   margin-top: 43rpx;
+  margin-left: 20rpx;
 }
 .back {
   display: block;
