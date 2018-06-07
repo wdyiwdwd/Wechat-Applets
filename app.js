@@ -8,6 +8,7 @@ App({
     openid: null,
     sessionKey: null,
     openGId: null,
+    userInfo: null
   },
   onLaunch: function (options) {
     var that = this;

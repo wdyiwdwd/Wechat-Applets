@@ -7,6 +7,8 @@ Page({
     motto: 'Hello World',
     current: 0,
     isFirst: null,
+    canIUse: wx.canIUse('button.open-type.getUserInfo'),
+    userInfo: {},
     questions: [
       {
         wine: '白酒',
@@ -41,12 +43,13 @@ Page({
     ],
     choosedAnswer: []
   },
-  //事件处理函数
+  // 事件处理函数
   bindViewTap: function() {
     wx.navigateTo({
       url: '../logs/logs'
     })
   },
+  // 判断是否初次使用
   onLoad: function () {
     if(app.globalData.isFirst) {
       this.setData({
@@ -63,6 +66,7 @@ Page({
       withShareTicket: true
     })
   },
+  // 转发响应，获取目标群id
   onShareAppMessage: function(res) {
     return {
       //title:
@@ -87,6 +91,7 @@ Page({
               success: function (res) {
                 console.log(res.data);
                 app.globalData.openGId = res.data.openGId;
+                // 群关系插入数据库
                 wx.request({
                   url: 'http://localhost:3000/onShare',
                   data: {
@@ -116,17 +121,20 @@ Page({
       }
     }
   },
+
   swiperChange: function(e) {
     console.log(e.detail.current);
     this.setData({
       current: e.detail.current
     })
   },
+
   radioChange: function(e) {
     console.log(this.data.current);
     this.data.choosedAnswer[this.data.current]=e.detail.value;
     console.log(this.data.choosedAnswer);
   },
+
   selfDone: function () {
     var that=this;
     var theUrl = "http://localhost:3000/selfInitial" 
@@ -135,18 +143,20 @@ Page({
       data: {
         wxid: app.globalData.openid,
         openGId: app.globalData.openGId,
+        nickname: that.data.userInfo.nickName,
+        avatar: that.data.userInfo.avatarUrl,
         questions: that.data.questions,
         choosedAnswer: that.data.choosedAnswer
       },
       success: function (res) {
         console.log(res.data)
+        that.setData({
+          isFirst: false
+        })
       },
       fail: function () {
         console.log("selfDone error!")
       }
-    })
-    that.setData({
-      isFirst: false
     })
   },
   goBlog: function() {
@@ -163,5 +173,16 @@ Page({
     wx.navigateTo({
       url: '../comment/comment',
     })
+  },
+
+  bindGetUserInfo: function(e) {
+    console.log(e);
+    if(e.detail.userInfo) {
+      app.globalData.userInfo = e.detail.userInfo;
+      this.setData({
+        userInfo: e.detail.userInfo
+      })
+      this.selfDone();
+    }
   }
 })
