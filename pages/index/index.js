@@ -2,45 +2,18 @@
 //获取应用实例
 const app = getApp()
 
+// 引入常量
+var consts = require('./consts');
+
 Page({
   data: {
     motto: 'Hello World',
     current: 0,
     isFirst: null,
+    isEdited: false,
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
     userInfo: {},
-    questions: [
-      {
-        wine: '白酒',
-        question: '您的白酒酒量是：',
-        answers: {
-          a: '3两以下',
-          b: '3-5两',
-          c: '5两-1斤',
-          d: '1斤以上'
-        }
-      },
-      {
-        wine: '红酒',
-        question: '您的红酒酒量是：',
-        answers: {
-          a: '3两以下',
-          b: '3-5两',
-          c: '5两-1斤',
-          d: '1斤以上'
-        }
-      },
-      {
-        wine: '啤酒',
-        question: '您的啤酒酒量是：',
-        answers: {
-          a: '3两以下',
-          b: '3-5两',
-          c: '5两-1斤',
-          d: '1斤以上'
-        }
-      }
-    ],
+    questions: consts.questions,
     choosedAnswer: []
   },
   // 事件处理函数
@@ -131,7 +104,7 @@ Page({
 
   radioChange: function(e) {
     console.log(this.data.current);
-    this.data.choosedAnswer[this.data.current]=e.detail.value;
+    this.data.choosedAnswer[this.data.current]=+e.detail.value;
     console.log(this.data.choosedAnswer);
   },
 
@@ -139,13 +112,12 @@ Page({
     var that=this;
     var theUrl = "http://localhost:3000/selfInitial" 
     wx.request({
-      url: theUrl,
+      url: theUrl, 
       data: {
         wxid: app.globalData.openid,
         openGId: app.globalData.openGId,
         nickname: that.data.userInfo.nickName,
         avatar: that.data.userInfo.avatarUrl,
-        questions: that.data.questions,
         choosedAnswer: that.data.choosedAnswer
       },
       success: function (res) {

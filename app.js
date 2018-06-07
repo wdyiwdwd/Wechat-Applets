@@ -8,7 +8,7 @@ App({
     openid: null,
     sessionKey: null,
     openGId: null,
-    userInfo: null
+    userInfo: {}
   },
   onLaunch: function (options) {
     var that = this;
@@ -64,6 +64,10 @@ App({
                 success: function (res) {
                   console.log(res.data.isFirst);
                   that.globalData.isFirst = res.data.isFirst;
+                  if(!that.globalData.isFirst) {
+                    that.globalData.userInfo.nickname = res.data.nickname;
+                    that.globalData.userInfo.avatar = res.data.avatar;
+                  }
                   // 确保页面渲染
                   if (that.isFirstReadyCallback) {
                     that.isFirstReadyCallback(res)
