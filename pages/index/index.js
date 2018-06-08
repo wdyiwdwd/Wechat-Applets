@@ -4,6 +4,8 @@ const app = getApp()
 
 // 引入常量
 var consts = require('./consts');
+var config = require('../config');
+var utils = require("../../utils/util.js")
 
 Page({
   data: {
@@ -14,7 +16,27 @@ Page({
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
     userInfo: {},
     questions: consts.questions,
-    choosedAnswer: []
+    choosedAnswer: [],
+    displayAnswer: [],
+    level: null,
+    editButton: '修改酒量',
+    pickers: [
+      {
+        index: 0,
+        wine: consts.questions[0].wine,
+        array: consts.questions[0].answers
+      },
+      {
+        index: 0,
+        wine: consts.questions[1].wine,
+        array: consts.questions[1].answers
+      },
+      {
+        index: 0,
+        wine: consts.questions[2].wine,
+        array: consts.questions[2].answers
+      }
+    ]
   },
   // 事件处理函数
   bindViewTap: function() {
@@ -26,11 +48,29 @@ Page({
   onLoad: function () {
     if(app.globalData.isFirst) {
       this.setData({
-        isFirst: app.globalData.isFirst
+        isFirst: app.globalData.isFirst,
       })
     } else {
       app.isFirstReadyCallback = res => {
-        this.setData({
+        var that=this;
+        if(!res.data.isFirst) {
+          utils.getAnswer(app.globalData.openid, function (data) {
+            that.setData({
+              displayAnswer: data
+            })
+          });
+          utils.getLevel(app.globalData.openid, function (data) {
+            that.setData({
+              level: data
+            })
+          });
+          utils.getMotto(app.globalData.openid, function (data) {
+            that.setData({
+              motto: data
+            })
+          });
+        }
+        that.setData({
           isFirst: res.data.isFirst
         })
       }
@@ -54,7 +94,7 @@ Page({
             var temp = res;
             // 解密
             wx.request({
-              url: 'http://localhost:3000/getGid',
+              url: config.host + '/getGid',
               data: {
                 appid: app.globalData.appid,
                 sessionKey: app.globalData.sessionKey,
@@ -66,7 +106,7 @@ Page({
                 app.globalData.openGId = res.data.openGId;
                 // 群关系插入数据库
                 wx.request({
-                  url: 'http://localhost:3000/onShare',
+                  url: config.host + '/onShare',
                   data: {
                     wxid: app.globalData.openid,
                     openGId: app.globalData.openGId
@@ -103,16 +143,22 @@ Page({
   },
 
   radioChange: function(e) {
+    var that=this;
     console.log(this.data.current);
     this.data.choosedAnswer[this.data.current]=+e.detail.value;
+    this.data.pickers[this.data.current].index=+e.detail.value;
+    this.setData({
+      choosedAnswer: that.data.choosedAnswer,
+      pickers: that.data.pickers
+    })
     console.log(this.data.choosedAnswer);
+    console.log(this.data.pickers);
   },
 
   selfDone: function () {
     var that=this;
-    var theUrl = "http://localhost:3000/selfInitial" 
     wx.request({
-      url: theUrl, 
+      url: config.host + '/selfInitial', 
       data: {
         wxid: app.globalData.openid,
         openGId: app.globalData.openGId,
@@ -121,9 +167,19 @@ Page({
         choosedAnswer: that.data.choosedAnswer
       },
       success: function (res) {
-        console.log(res.data)
+        console.log(res.data);
+        utils.getAnswer(app.globalData.openid, function (data) {
+          that.setData({
+            displayAnswer: data
+          })
+        });
+        utils.getLevel(app.globalData.openid, function (data) {
+          that.setData({
+            level: data
+          })
+        });
         that.setData({
-          isFirst: false
+          isFirst: false,
         })
       },
       fail: function () {
@@ -156,5 +212,91 @@ Page({
       })
       this.selfDone();
     }
+  },
+
+  updateMotto: function(e) {
+    this.setData({
+      motto: e.detail.value
+    })
+    var that=this;
+    wx.request({
+      url: config.host + '/updateMotto',
+      data: {
+        wxid: app.globalData.openid,
+        motto: that.data.motto
+      },
+      success: function (res) {
+        console.log(res.data);
+      },
+      fail: function () {
+        console.log("updateMotto error!")
+      }
+    })
+  },
+
+  edit: function () {
+    var that=this;
+    if(that.data.isEdited===false) {
+      that.setData({
+        isEdited: true,
+        editButton: '完成修改'
+      })
+    } else {
+      wx.request({
+        url: config.host + '/updateWines',
+        data: {
+          wxid: app.globalData.openid,
+          choosedAnswer: that.data.choosedAnswer
+        },
+        success: function (res) {
+          console.log(res.data);
+          utils.getAnswer(app.globalData.openid, function (data) {
+            that.setData({
+              displayAnswer: data
+            })
+          });
+          utils.getLevel(app.globalData.openid, function (data) {
+            that.setData({
+              level: data
+            })
+          });
+          that.setData({
+            isEdited: false,
+            editButton: '修改酒量'
+          })
+        },
+        fail: function () {
+          console.log("updateWines error!")
+        }
+      })
+    }
+  },
+
+  bindPickerChange: function(e,index) {
+    var that=this;
+    this.data.choosedAnswer[index] = +e.detail.value;
+    this.data.pickers[index].index = +e.detail.value;
+    this.setData({
+      choosedAnswer: that.data.choosedAnswer,
+      pickers: that.data.pickers
+    })
+    console.log(this.data.choosedAnswer);
+    console.log(this.data.pickers);
+  },
+
+  bindPickerChange0: function(e) {
+    this.bindPickerChange(e,0);
+  },
+
+  bindPickerChange1: function (e) {
+    this.bindPickerChange(e, 1);
+  },
+
+  bindPickerChange2: function (e) {
+    this.bindPickerChange(e, 2);
+  },
+
+  bindPickerCancel: function() {
+
   }
 })

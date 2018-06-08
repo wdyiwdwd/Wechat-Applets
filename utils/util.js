@@ -1,3 +1,6 @@
+var config = require('../pages/config');
+var consts = require('../pages/index/consts');
+
 const formatTime = date => {
   const year = date.getFullYear()
   const month = date.getMonth() + 1
@@ -18,7 +21,75 @@ const formatDBTime = time => {
   return time.substr(0, 10)
 }
 
+var getAnswer =  function(wxid, dosomething) {
+  wx.request({
+    url: config.host + '/getWines',
+    data: {
+      wxid: wxid,
+    },
+    success: function (res) {
+      var displayAnswer=[
+        {
+          wine: null,
+          answers: null
+        },
+        {
+          wine: null,
+          answers: null
+        },
+        {
+          wine: null,
+          answers: null
+        }];
+      for(var i=0;i<consts.questions.length;i++) {
+        displayAnswer[i].wine = consts.questions[i].wine;
+        displayAnswer[i].answers = '未自评';
+      }
+      for (var i = 0; i < res.data.length; i++) {
+        displayAnswer[res.data[i].type].answers = consts.questions[res.data[i].type].answers[res.data[i].answer];
+      }
+      dosomething(displayAnswer);
+    },
+    fail: function () {
+      return 'getAnswer error!';
+    }
+  })
+}
+
+var getLevel = function (wxid, dosomething) {
+  wx.request({
+    url: config.host + '/getuser',
+    data: {
+      wxid: wxid,
+    },
+    success: function (res) {
+      dosomething(consts.levels[res.data.level]);
+    },
+    fail: function () {
+      return "getLevel error!";
+    }
+  })
+}
+
+var getMotto = function (wxid, dosomething) {
+  wx.request({
+    url: config.host + '/getuser',
+    data: {
+      wxid: wxid,
+    },
+    success: function (res) {
+      dosomething(res.data.motto);
+    },
+    fail: function () {
+      return "getMotto error!";
+    }
+  })
+}
+
 module.exports = {
   formatTime: formatTime,
-  formatDBTime: formatDBTime
+  formatDBTime: formatDBTime,
+  getAnswer: getAnswer,
+  getLevel: getLevel,
+  getMotto: getMotto
 }

@@ -1,4 +1,5 @@
 //app.js
+var config = require('./pages/config');
 
 App({
   globalData: {
@@ -34,7 +35,7 @@ App({
                     var temp = res;
                     // 解密
                     wx.request({
-                      url: 'http://localhost:3000/getGid',
+                      url: config.host + '/getGid',
                       data: {
                         appid: that.globalData.appid,
                         sessionKey: that.globalData.sessionKey,
@@ -57,7 +58,7 @@ App({
               }
               //查看用户是否初次使用
               wx.request({
-                url: 'http://localhost:3000/isFirst',
+                url: config.host + '/isFirst',
                 data: {
                   openid: that.globalData.openid
                 },

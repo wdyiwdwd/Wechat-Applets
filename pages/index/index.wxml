@@ -27,10 +27,37 @@
 <view wx:else>
   <view wx:if="{{isFirst==null}}"></view>
   <view wx:else>
-    <text>hhh</text>
+    <view class="userinfo">
+      <open-data type="userAvatarUrl" class="userinfo-avatar"></open-data>
+      <open-data type="userNickName" class="userinfo-nickname"></open-data>
+    </view>
+    <view wx:if="{{isEdited}}">
+      <text class="wineInfo">{{pickers[0].wine}}酒量</text>
+      <picker bindchange='bindPickerChange0' bindcancel='bindPickerCancel' value='{{pickers[0].index}}' range='{{pickers[0].array}}'>
+        <text class='wineInfo'>当前选择： {{pickers[0].array[pickers[0].index]}}</text>
+      </picker>
+      <text class="wineInfo">{{pickers[1].wine}}酒量</text>
+      <picker bindchange='bindPickerChange1' bindcancel='bindPickerCancel' value='{{pickers[1].index}}' range='{{pickers[1].array}}'>
+        <text class='wineInfo'>当前选择： {{pickers[1].array[pickers[1].index]}}</text>
+      </picker>
+      <text class="wineInfo">{{pickers[2].wine}}酒量</text>
+      <picker bindchange='bindPickerChange2' bindcancel='bindPickerCancel' value='{{pickers[2].index}}' range='{{pickers[2].array}}'>
+        <text class='wineInfo'>当前选择： {{pickers[2].array[pickers[2].index]}}</text>
+      </picker>
+    </view>
+    <view wx:else>
+      <block wx:for="{{displayAnswer}}">
+        <text class="wineInfo">{{item.wine}}酒量： {{item.answers}}</text>
+      </block>
+      <view class="motto">
+        <input placeholder="{{motto}}" focus="{{true}}" bindconfirm='updateMotto'/>
+      </view>
+      <text class="wineInfo">酒量等级： {{level}}</text>
+    </view>
+    <button bindtap='edit'>{{editButton}}</button>
     <button open-type="share">转发到群</button>
-      <button bindtap='goBlog'>去照片</button>
-      <button bindtap='goList'>去群里</button>
-      <button bindtap='goComment'>去评论</button>
+    <button bindtap='goBlog'>去照片</button>
+    <button bindtap='goList'>去群里</button>
+    <button bindtap='goComment'>去评论</button>
   </view>
 </view>

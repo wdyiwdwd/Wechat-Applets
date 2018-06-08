@@ -8,6 +8,7 @@ var blog = require('./api/blog');
 var comment = require('./api/comment');
 var group = require('./api/group');
 var user = require('./api/user');
+var wine = require('./api/wine');
 var router = express.Router();
 
 router.get('/', test.testapi);
@@ -17,6 +18,9 @@ router.get('/getGid', getGid.getGid);
 router.get('/onShare', onShare.onShare);
 router.get('/getuser', user.getUser)
 router.get('/getusers', group.getUsers)
+router.get('/getWines', wine.getWines);
+router.get('/updateMotto', user.updateMotto);
+router.get('/updateWines', wine.updateWines);
 
 router.get('/pictures', blog.getPictures)
 

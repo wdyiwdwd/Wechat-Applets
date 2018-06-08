@@ -25,3 +25,7 @@
 .swiper {
   width: 150px;
 }
+
+.wineInfo {
+  display: block;
+}
