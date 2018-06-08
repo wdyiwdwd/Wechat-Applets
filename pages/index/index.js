@@ -201,6 +201,8 @@ Page({
         userInfo: e.detail.userInfo
       })
       this.selfDone();
+    } else {
+      this.showDetail();
     }
   },
 
@@ -319,5 +321,12 @@ Page({
         })
       });
     }
+  },
+  showDetail: function() {
+    wx.showModal({
+      title: '大家的酒量',
+      content: '关于信息',
+      showCancel: false
+    })
   }
 })
