@@ -65,6 +65,7 @@
   color: #F8CECC;
   font-size: 35rpx;
   display: inline-block;
+  /* width: clac(50% - 85rpx); */
   height: 70rpx;
   padding: 12rpx 9rpx 0rpx 15rpx;
 }
@@ -72,5 +73,6 @@
   font-size: 28rpx;
   color: rgb(199, 199, 199);
   display: inline-block;
-  padding-left: 170rpx;
+  float: right;
+  margin: 26rpx 12rpx 0rpx 0rpx;
 }

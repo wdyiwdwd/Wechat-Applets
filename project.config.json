@@ -33,8 +33,21 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": -1,
-			"list": []
+			"current": 0,
+			"list": [
+				{
+					"id": 0,
+					"name": "群",
+					"pathName": "pages/index/index",
+					"query": "",
+					"scene": "1044",
+					"shareInfo": {
+						"groupName": "测试模拟群0",
+						"shareName": "DxHX5ze3GYvP6AhYKZZVKKketA6bwnE1_JnH0kOtuNU@cr4dev",
+						"shareKey": "dKS28by4mtkC6mMF-IM0Dl70rFqwuERIiW5FUYciFc7RYJDSBE6rA9oViyDcVzN1L0Ve56gshoV-ETnT1I_yTg~~"
+					}
+				}
+			]
 		}
 	}
 }

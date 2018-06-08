@@ -25,8 +25,8 @@
   </view>
 </view>
 <view wx:else>
-  <view wx:if="{{isFirst==null}}"></view>
-  <view wx:else>
+  <!-- <view wx:if="{{isFirst==null}}"></view> -->
+  <!-- <view wx:else> --><view>
     <view class="userinfo">
       <open-data type="userAvatarUrl" class="userinfo-avatar"></open-data>
       <open-data type="userNickName" class="userinfo-nickname"></open-data>

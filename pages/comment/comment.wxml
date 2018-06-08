@@ -5,8 +5,8 @@
     <view class="comments-info">
     <image src="{{item.avatar}}" class="comment-avatar"></image>
     <text class='comment-nickname'>{{item.nickname}}</text>
-    <text class="comment-time">{{"——" + item.createdAt}}</text>
     </view>
+    <text class="comment-time">{{"——" + item.createdAt}}</text>
     <text class="comment-content">{{item.content}}</text>
     </view>
   </block>
