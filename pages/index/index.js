@@ -46,30 +46,20 @@ Page({
   },
   // 判断是否初次使用
   onLoad: function () {
+    var that = this;
+    if(app.globalData.scene==1044) {
+      that.setData({
+        isFirst: app.globalData.isFirst
+      })
+      that.dataInitial(that.data.isFirst);
+    }
     if(app.globalData.isFirst) {
-      this.setData({
+      that.setData({
         isFirst: app.globalData.isFirst,
       })
     } else {
       app.isFirstReadyCallback = res => {
-        var that=this;
-        if(!res.data.isFirst) {
-          utils.getAnswer(app.globalData.openid, function (data) {
-            that.setData({
-              displayAnswer: data
-            })
-          });
-          utils.getLevel(app.globalData.openid, function (data) {
-            that.setData({
-              level: data
-            })
-          });
-          utils.getMotto(app.globalData.openid, function (data) {
-            that.setData({
-              motto: data
-            })
-          });
-        }
+        that.dataInitial(res.data.isFirst);
         that.setData({
           isFirst: res.data.isFirst
         })
@@ -83,7 +73,7 @@ Page({
   onShareAppMessage: function(res) {
     return {
       //title:
-      //path: '/pages/logs/logs',
+      path: '/pages/list/list',
       //imageUrl:
       success: function(res) {
         console.log(res.shareTickets[0]);
@@ -211,6 +201,8 @@ Page({
         userInfo: e.detail.userInfo
       })
       this.selfDone();
+    } else {
+      this.showDetail();
     }
   },
 
@@ -298,5 +290,43 @@ Page({
 
   bindPickerCancel: function() {
 
+  },
+
+  dataInitial: function(isFirst) {
+    // 非首次进入的数据初始化
+    var that = this;
+    if (!isFirst) {
+      utils.getAnswer(app.globalData.openid, function (data) {
+        that.setData({
+          displayAnswer: data
+        })
+      });
+      utils.getLevel(app.globalData.openid, function (data) {
+        that.setData({
+          level: data
+        })
+      });
+      utils.getMotto(app.globalData.openid, function (data) {
+        that.setData({
+          motto: data
+        })
+      });
+      utils.getChoosed(app.globalData.openid, function (data) {
+        for (var i = 0; i < data.length; i++) {
+          that.data.pickers[i].index = data[i];
+        }
+        that.setData({
+          choosedAnswer: data,
+          pickers: that.data.pickers
+        })
+      });
+    }
+  },
+  showDetail: function() {
+    wx.showModal({
+      title: '大家的酒量',
+      content: '关于信息',
+      showCancel: false
+    })
   }
 })

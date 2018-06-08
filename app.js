@@ -9,10 +9,12 @@ App({
     openid: null,
     sessionKey: null,
     openGId: null,
-    userInfo: {}
+    userInfo: {},
+    scene: null
   },
   onLaunch: function (options) {
     var that = this;
+    that.globalData.scene=options.scene;
     // 登录
     wx.login({
       success: function(res) {

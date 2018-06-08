@@ -78,10 +78,33 @@ var getMotto = function (wxid, dosomething) {
       wxid: wxid,
     },
     success: function (res) {
-      dosomething(res.data.motto);
+      if (res.data.motto) {
+        dosomething(res.data.motto);
+      } else {
+        dosomething('请输入...')
+      }
     },
     fail: function () {
       return "getMotto error!";
+    }
+  })
+}
+
+var getChoosed = function (wxid, dosomething) {
+  wx.request({
+    url: config.host + '/getWines',
+    data: {
+      wxid: wxid,
+    },
+    success: function (res) {
+      var choosedAnswer=[];
+      for (var i = 0; i < res.data.length; i++) {
+        choosedAnswer[res.data[i].type]=res.data[i].answer;
+      }
+      dosomething(choosedAnswer);
+    },
+    fail: function () {
+      return 'getChoosed error!';
     }
   })
 }
@@ -91,5 +114,6 @@ module.exports = {
   formatDBTime: formatDBTime,
   getAnswer: getAnswer,
   getLevel: getLevel,
-  getMotto: getMotto
+  getMotto: getMotto,
+  getChoosed: getChoosed
 }

@@ -21,6 +21,9 @@ exports.updateWines = async function (req, res) {
       wxid: req.query.wxid
     }
   })
+  user = await user.update({
+    'level': Math.max.apply(null, choosedAnswer)
+  })
   var wines = await user.getWines({
     'where': {}
   })
