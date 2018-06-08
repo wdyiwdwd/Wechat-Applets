@@ -1,10 +1,13 @@
-<view>
+<view class="container">
   <scroll-view scroll-y="true" class="scroll">
   <block wx:for="{{comments}}">
-    <view class="display-item">
+    <view class="comments-item">
+    <view class="comments-info">
     <image src="{{item.avatar}}" class="comment-avatar"></image>
-    <text class="introduce">{{"+" + item.content}}</text>
-    <text class="create-time">{{"——" + item.createdAt}}</text>
+    <text class='comment-nickname'>{{item.nickname}}</text>
+    <text class="comment-time">{{"——" + item.createdAt}}</text>
+    </view>
+    <text class="comment-content">{{item.content}}</text>
     </view>
   </block>
   </scroll-view>

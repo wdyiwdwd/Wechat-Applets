@@ -10,7 +10,7 @@
       <text class="list-name">{{item.nickname}}</text>
     </view>
     <image class="list-more" src='../static/more.png' data-index="{{index}}" bindtap='lookDetail'></image>
-    <image src='../static/bottle.png' class="list-more"  data-index="{{index}}"   bindtap='uploadPicture'></image>
+    <image src='{{"../static/总体" + item.level + ".png"}}' class="list-more"  data-index="{{index}}"   bindtap='uploadPicture'></image>
   </view>
 </block>
 </scroll-view>
