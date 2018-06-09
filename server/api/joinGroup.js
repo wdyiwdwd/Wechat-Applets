@@ -14,7 +14,7 @@ exports.joinGroup = async function (req, res) {
     }
   });
   if (users.length > 0) {
-    await groups[0].addUser(user[0]);
+    await groups[0].addUser(users[0]);
   } 
   res.send('joinGroup success!');
 }

@@ -18,14 +18,15 @@ Page({
     levelNum: 1, 
     choosedAnswer: []
   },
-  onShow: function (options) {
-    var that = this;
+  onLoad: function (options) {
     this.setData({
       toid: options.toid,
       groupid: app.globalData.openGId,
       userid: app.globalData.openid,
     }) 
-    console.log(options.toid);
+  },
+  onShow: function () {
+    var that = this;
     utils.getAnswer(that.data.toid, function (data) {
       that.setData({
         displayAnswer: data

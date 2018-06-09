@@ -16,12 +16,12 @@ var config = {
   db: {
     host: 'localhost',
     dialect: 'mysql',
-    // user: 'root',
-    // password: 'wxb7be4acbca4aa702',
-    // database: 'cAuth',
-    user: 'wdyiwdwd',
-    password: '',
-    database: 'wxmini',
+    user: 'root',
+    password: 'wxb7be4acbca4aa702',
+    database: 'cAuth',
+    // user: 'wdyiwdwd',
+    // password: '',
+    // database: 'wxmini',
     pool: {
       max: 5,    //最大连接数
       min: 0,    //最小

@@ -46,19 +46,20 @@ App({
                       },
                       success: function (res) {
                         console.log(res.data);
-                        that.globalData.openGId = res.data.openGId;
+                        var temp=res;
                         // 群关系插入数据库
                         wx.request({
                           url: config.host + '/joinGroup',
                           data: {
                             wxid: that.globalData.openid,
-                            openGId: that.globalData.openGId
+                            openGId: temp.data.openGId
                           },
                           success: function (res) {
                             console.log(res.data);
+                            that.globalData.openGId = temp.data.openGId;
                             // 确保页面渲染
                             if (that.openGIdReadyCallback) {
-                              that.openGIdReadyCallback(res)
+                              that.openGIdReadyCallback(temp)
                             }
                           },
                           fail: function () {
