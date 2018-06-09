@@ -21,7 +21,7 @@
     </block>
   </swiper>
   <view class="tile">
-    <button class="button right-button" wx:if="{{canIUse}}" open-type="getUserInfo" lang="zh_CN" bindgetuserinfo="bindGetUserInfo">完成自评</button>
+    <button class="button right-button" wx:if="{{canIUse}}" open-type="getUserInfo" lang="zh_CN" bindgetuserinfo="bindGetUserInfo">完成自估</button>
     <view wx:else>请升级微信版本</view>
     <button class="button left-button" bindtap='showDetail'>关于</button>
   </view>
