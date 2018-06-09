@@ -9,6 +9,7 @@ var comment = require('./api/comment');
 var group = require('./api/group');
 var user = require('./api/user');
 var wine = require('./api/wine');
+var joinGroup = require('./api/joinGroup');
 var router = express.Router();
 
 router.get('/', test.testapi);
@@ -21,6 +22,7 @@ router.get('/getusers', group.getUsers)
 router.get('/getWines', wine.getWines);
 router.get('/updateMotto', user.updateMotto);
 router.get('/updateWines', wine.updateWines);
+router.get('/joinGroup',joinGroup.joinGroup);
 
 router.get('/pictures', blog.getPictures)
 

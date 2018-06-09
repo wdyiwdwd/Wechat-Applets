@@ -9,7 +9,7 @@ var utils = require("../../utils/util.js")
 
 Page({
   data: {
-    motto: 'Hello World',
+    motto: '请输入饮酒格言...',
     current: 0,
     isFirst: null,
     isEdited: false,
@@ -196,15 +196,24 @@ Page({
   },
 
   bindGetUserInfo: function(e) {
+    var that=this;
     console.log(e);
     if(e.detail.userInfo) {
       app.globalData.userInfo = e.detail.userInfo;
-      this.setData({
+      that.setData({
         userInfo: e.detail.userInfo
       })
-      this.selfDone();
+      if(that.data.choosedAnswer.length>0) {
+        that.selfDone();
+      } else {
+        wx.showModal({
+          title: '提示',
+          content: '请至少自估一项酒量',
+          showCancel: false
+        })
+      }
     } else {
-      this.showDetail();
+      that.showDetail();
     }
   },
 
@@ -330,7 +339,7 @@ Page({
   showDetail: function() {
     wx.showModal({
       title: '大家的酒量',
-      content: '关于信息',
+      content: '/t“大家的酒量”是一款记录群成员酒量并可以上传酒局照片纪实的健康饮酒管理小程序，旨在让群成员之间了解相互的酒量并进行监督，避免劝酒不当、饮酒过量的状况。',
       showCancel: false
     })
   }

@@ -47,10 +47,24 @@ App({
                       success: function (res) {
                         console.log(res.data);
                         that.globalData.openGId = res.data.openGId;
-                        // 确保页面渲染
-                        if (that.openGIdReadyCallback) {
-                          that.openGIdReadyCallback(res)
-                        }
+                        // 群关系插入数据库
+                        wx.request({
+                          url: config.host + '/joinGroup',
+                          data: {
+                            wxid: that.globalData.openid,
+                            openGId: that.globalData.openGId
+                          },
+                          success: function (res) {
+                            console.log(res.data);
+                            // 确保页面渲染
+                            if (that.openGIdReadyCallback) {
+                              that.openGIdReadyCallback(res)
+                            }
+                          },
+                          fail: function () {
+                            console.log("joinGroup error!")
+                          }
+                        })
                       },
                       fail: function () {
                         console.log('getGid error!');
