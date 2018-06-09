@@ -47,6 +47,10 @@ App({
                       success: function (res) {
                         console.log(res.data);
                         that.globalData.openGId = res.data.openGId;
+                        // 确保页面渲染
+                        if (that.openGIdReadyCallback) {
+                          that.openGIdReadyCallback(res)
+                        }
                       },
                       fail: function () {
                         console.log('getGid error!');

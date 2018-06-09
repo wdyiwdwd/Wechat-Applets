@@ -12,6 +12,6 @@
     <image src='../static/add.png' class="add-img" bindtap='uploadPicture'></image>
   </view>
   <view hidden="{{!showCover}}" class="add-view">
-    <textarea placeholder="请输入这张图的评论" focus='{{textFocus}}' class="remark" bindinput="changeRemark" bindconfirm='addRemark' show-confirm-bar bindblur="addRemark"/>
+    <textarea placeholder="请输入这张图的评论" focus='{{textFocus}}' class="remark" bindinput="changeRemark" value="{{remark}}" bindconfirm='addRemark'  bindblur="hideInput"    show-confirm-bar/>
   </view>
 </view>

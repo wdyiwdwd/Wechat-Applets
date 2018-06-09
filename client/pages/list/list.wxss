@@ -16,7 +16,7 @@
   width: 100%;
   text-align: left;
   font-size: 50rpx;
-  color: gray;
+  color: #B6CCE3;
   margin: 6% 10% 6% calc(10% + 15rpx);
 }
 
@@ -38,7 +38,7 @@
   /* display: inline-block; */
   /* margin: 10% 10% 10% 10%; */
   margin-left: 7%;
-  color: gray; 
+  color: #F8CECC;
 }
 
 .list-more {
@@ -55,7 +55,7 @@
   left: 10%;
   bottom: 5%;
   background-color: white;
-  color: gray;
+  color: #B6CCE3;
   font-size: 40rpx;
 }
 
@@ -69,7 +69,7 @@
   right: 12%;
   bottom: 5%;
   background-color: white;
-  color: gray;
+  color: #B6CCE3;
   font-size: 40rpx;
 }
 

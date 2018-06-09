@@ -10,7 +10,7 @@ Page({
     group: [
     ],
   },
-  onLoad: function () {
+  onShow: function () {
     console.log(app.globalData.openGId);
     var that = this;
     this.setData({
@@ -18,21 +18,41 @@ Page({
       groupid: app.globalData.openGId,
       hasUserInfo: true
     })
-    wx.request({
-      url: config.host + '/getusers',
-      data: {
-        groupid: app.globalData.openGId
-      },
-      method: 'GET',
-      dataType: 'json',
-      success: function(res) {
-        console.log(res.data);
-        that.setData({
-          group: res.data
+    if(app.globalData.openGId) {
+      wx.request({
+        url: config.host + '/getusers',
+        data: {
+          groupid: app.globalData.openGId
+        },
+        method: 'GET',
+        dataType: 'json',
+        success: function (res) {
+          console.log(res.data);
+          that.setData({
+            group: res.data
+          })
+        },
+        fail: function (res) { }
+      })
+    } else {
+      app.openGIdReadyCallback = res => {
+        wx.request({
+          url: config.host + '/getusers',
+          data: {
+            groupid: res.data.openGId
+          },
+          method: 'GET',
+          dataType: 'json',
+          success: function (res) {
+            console.log(res.data);
+            that.setData({
+              group: res.data
+            })
+          },
+          fail: function (res) { }
         })
-      },
-      fail: function(res) {}
-    })
+      }
+    }
   },
   returnIndex: function () {
     wx.navigateTo({
@@ -50,7 +70,7 @@ Page({
     console.log(e.currentTarget.dataset.index)
     console.log(this.data.openid)
     console.log(this.data.group[index].wxid)
-    if(this.data.openid !== this.data.group[index].wxid) {
+    if(this.data.openid === this.data.group[index].wxid) {
       wx.navigateTo({
         url: '../index/index',
       })

@@ -12,9 +12,13 @@ Page({
     comment: '',
     toid: '',
     userid: '2',
-    textFocus: false
+    textFocus: false,
+    displayAnswer:[],
+    level:'',
+    levelNum: 1, 
+    choosedAnswer: []
   },
-  onLoad: function (options) {
+  onShow: function (options) {
     var that = this;
     this.setData({
       toid: options.toid,
@@ -22,6 +26,22 @@ Page({
       userid: app.globalData.openid,
     }) 
     console.log(options.toid);
+    utils.getAnswer(that.data.toid, function (data) {
+      that.setData({
+        displayAnswer: data
+      })
+    });
+    utils.getLevel(that.data.toid, function (data) {
+      that.setData({
+        level: data
+      })
+    });
+    utils.getChoosed(that.data.toid, function (data) {
+      that.setData({
+        levelNum: Math.max.apply(null, data),
+        choosedAnswer: data,
+      })
+    });
     wx.request({
       url: config.host + '/getuser',
       data: {
@@ -35,8 +55,8 @@ Page({
         });
         console.log(res.data)
       },
-      fail: function(res) {}
-    })
+      fail: function (res) { }
+    });
     that.getComments(that.data.toid, that.data.groupid);
   },
   getComments: function(toid, groupid) { 
@@ -62,11 +82,34 @@ Page({
       fail: function (res) { },
     })
   },
+  hideInput() {
+    this.setData({
+      showCover: false,
+      textFocus: false
+    })
+  },
   showAddModal: function() {
-     this.setData({
-       showCover: true,
-       textFocus: true
-     }) 
+    if (app.globalData.isFirst === true) {
+      wx.showModal({
+        title: '提示',
+        content: '请先完成自评，再和您的群友一同分享吧~',
+        success: function (res) {
+          if (res.confirm) {
+            wx.navigateTo({
+              url: '../index/index',
+            })
+          } else if (res.cancel) {
+            console.log('用户点击取消')
+          }
+        }
+      })
+    }
+    else {
+      this.setData({
+        showCover: true,
+        textFocus: true
+      })
+    } 
   },
   changeComment(event) {
     this.setData({

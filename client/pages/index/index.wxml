@@ -21,14 +21,16 @@
     </block>
   </swiper>
   <view class="tile">
-    <button class="button left-button" wx:if="{{canIUse}}" open-type="getUserInfo" lang="zh_CN" bindgetuserinfo="bindGetUserInfo">完成自评</button>
+    <button class="button right-button" wx:if="{{canIUse}}" open-type="getUserInfo" lang="zh_CN" bindgetuserinfo="bindGetUserInfo">完成自评</button>
     <view wx:else>请升级微信版本</view>
-    <button class="button right-button" bindtap='showDetail'>关于</button>
+    <button class="button left-button" bindtap='showDetail'>关于</button>
   </view>
 </view>
 <view wx:else>
-   <!-- <view wx:if="{{isFirst==null}}"></view>
-    <view class="user-card" wx:else> --><view>
+    <view wx:if="{{isFirst==null}}" class="loading">
+        <text>...</text>
+    </view>
+    <view class="user-card" wx:else> 
     <view class="userinfo card">
       <open-data type="userAvatarUrl" class="userinfo-avatar"></open-data>
       <open-data type="userNickName" class="userinfo-nickname"></open-data>
@@ -43,21 +45,21 @@
     </view> -->
     <view class="wines" wx:if="{{isEdited}}">
       <!-- <text class="wineInfo">{{pickers[0].wine}}:</text> -->
-      <picker class="card wine-info" bindchange='bindPickerChange0' bindcancel='bindPickerCancel' value='{{pickers[0].index}}' range='{{pickers[0].array}}'>
+      <picker class="wine-info" bindchange='bindPickerChange0' bindcancel='bindPickerCancel' value='{{pickers[0].index}}' range='{{pickers[0].array}}'>
         <image src='{{"../static/1" + (choosedAnswer[0] + 1) + ".png"}}' class="wine-img"></image>
         <text class="userinfo-nickname">{{pickers[0].wine}}:</text>
         <text class="userinfo-motto">{{pickers[0].array[pickers[0].index]}}</text>
         <view class="wine-change"></view>
       </picker>
       <!-- <text class="wineInfo">{{pickers[1].wine}}:</text> -->
-      <picker  class="card wine-info" bindchange='bindPickerChange1' bindcancel='bindPickerCancel' value='{{pickers[1].index}}' range='{{pickers[1].array}}'>
+      <picker  class="wine-info" bindchange='bindPickerChange1' bindcancel='bindPickerCancel' value='{{pickers[1].index}}' range='{{pickers[1].array}}'>
         <image src='{{"../static/2" + (choosedAnswer[1] + 1) + ".png"}}' class="wine-img"></image>
         <text class="userinfo-nickname">{{pickers[1].wine}}:</text>
         <text  class="userinfo-motto">{{pickers[1].array[pickers[1].index]}}</text>
         <view class="wine-change"></view>
       </picker>
       <!-- <text class="wineInfo">{{pickers[2].wine}}:</text> -->
-      <picker class="card wine-info" bindchange='bindPickerChange2' bindcancel='bindPickerCancel' value='{{pickers[2].index}}' range='{{pickers[2].array}}'>
+      <picker class="wine-info" bindchange='bindPickerChange2' bindcancel='bindPickerCancel' value='{{pickers[2].index}}' range='{{pickers[2].array}}'>
         <image src='{{"../static/3" + (choosedAnswer[2] + 1) + ".png"}}' class="wine-img"></image>
         <text class="userinfo-nickname">{{pickers[2].wine}}:</text>
         <text class="userinfo-motto">{{pickers[2].array[pickers[2].index]}}</text>
@@ -66,10 +68,11 @@
     </view>
     <view class="wines" wx:else>
       <block wx:for="{{displayAnswer}}">
-        <view class="card  wine-info">
+        <view class="wine-info">
         <image src='{{"../static/" + (index+1) + "" + (choosedAnswer[index]+1) + ".png"}}' class="wine-img"></image>
         <text class="userinfo-nickname">{{item.wine}}:</text>
         <text class="userinfo-motto"> {{item.answers}}</text>
+        <!-- <view class="wine-change not-change"></view> -->
         </view>
       </block>
     </view>

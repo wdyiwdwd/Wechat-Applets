@@ -1,5 +1,21 @@
-<view class="container">
+<view>
   <scroll-view scroll-y="true" class="scroll">
+  <view class="userinfo card">
+    <image src='{{theUser.avatar}}' class="userinfo-avatar"></image>
+    <text class="userinfo-nickname">{{theUser.nickname}}</text>
+    <text class="userinfo-motto">{{level}}</text>
+    <image src='{{"../static/0" + (levelNum + 1) + ".png"}}' class="level-image"></image>
+            <!-- <input placeholder="{{motto}}" focus="{{true}}" bindconfirm='updateMotto'/> -->
+  </view>
+  <view class="wines">
+    <block wx:for="{{displayAnswer}}">
+      <view class="wine-info">
+      <image src='{{"../static/" + (index+1) + "" + (choosedAnswer[index]+1) + ".png"}}' class="wine-img"></image>
+      <text class="userinfo-nickname">{{item.wine}}:</text>
+      <text class="userinfo-motto"> {{item.answers}}</text>
+      </view>
+    </block>
+  </view>
   <block wx:for="{{comments}}">
     <view class="comments-item">
     <view class="comments-info">
@@ -15,7 +31,7 @@
     <image src='../static/add.png' class="add-img" bindtap='showAddModal'></image>
   </view>
   <view hidden="{{!showCover}}" class="add-view">
-    <textarea placeholder="请输如您对这位酒友的评论：" focus='{{textFocus}}' class="comment-imput" bindinput="changeComment" bindconfirm='addComment' show-confirm-bar bindblur="addComment"/>
+    <textarea placeholder="请输如您对这位酒友的评论：" focus='{{textFocus}}' class="comment-input" bindinput="changeComment" value="{{comment}}" bindconfirm='addComment' bindblur="hideInput" show-confirm-bar/>
     <button bindtap='addComment'>提交</button>
   </view>
 </view>

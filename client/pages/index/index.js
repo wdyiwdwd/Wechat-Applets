@@ -46,7 +46,7 @@ Page({
     })
   },
   // 判断是否初次使用
-  onLoad: function () {
+  onShow: function () {
     var that = this;
     if(app.globalData.scene==1044) {
       that.setData({

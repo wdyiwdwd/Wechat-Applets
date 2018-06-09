@@ -1,3 +1,91 @@
+.wines{
+  margin: 4% 10% 5% 10%;
+  width: 80%;
+  padding: 20rpx 10rpx 20rpx 10rpx; 
+  -webkit-box-shadow:0 2px 4px rgba(0, 0, 0, 0.1), 0 3px 3px rgba(0, 0, 0, 0.1);
+  -moz-box-shadow:0 2px 4px rgba(0, 0, 0, 0.1), 0 3px 3px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1), 0 3px 3px rgba(0, 0, 0, 0.1);
+  -o-box-shadow:0 2px 4px rgba(0, 0, 0, 0.1), 0 3px 3px rgba(0, 0, 0, 0.1); 
+}
+
+.wine-info {
+  height: 140rpx;
+  display: block;
+  margin: 30rpx 0 30rpx 0;
+  width: 100%;
+}
+
+.userinfo {
+  height: 140rpx;
+}
+
+.userinfo-avatar {
+  display: inline-block;
+  float: left;
+  overflow: hidden;
+  border-radius: 50%;
+  width: 120rpx;
+  height: 120rpx;
+  margin: 10rpx;
+  border: 1px solid #B6CCE3;
+  -webkit-box-shadow:0 0px 8px #B6CCE3;
+  -moz-box-shadow:0 0px 8px #B6CCE3;
+  box-shadow: 0 0px 8px #B6CCE3;
+  -o-box-shadow:0 0px 8px #B6CCE3;
+}
+
+.wine-img {
+  display: inline-block;
+  float: left;
+  overflow: hidden;
+  /* border-radius: 50%; */
+  width: 120rpx;
+  height: 120rpx;
+  margin: 10rpx;
+}
+
+.level-image {
+  display: block;
+  position: relative;
+  width: 70rpx;
+  height: 70rpx;
+  /* border-radius: 50%; */
+  left: calc(100% - 230rpx);
+  top: -85rpx;
+}
+
+
+.userinfo-nickname {
+  display: inline-block;
+  float: left;
+  margin: 10rpx 30rpx 10rpx 30rpx;
+  color: #F8CECC;
+  font-size: 40rpx;
+  width: 50%;
+}
+
+.card {
+  height: 140rpx;
+  display: block;
+  margin: 5% 10% 5% 10%;
+  width: 80%;
+  padding: 20rpx 10rpx 20rpx 10rpx; 
+  -webkit-box-shadow:0 2px 4px rgba(0, 0, 0, 0.1), 0 3px 3px rgba(0, 0, 0, 0.1);
+  -moz-box-shadow:0 2px 4px rgba(0, 0, 0, 0.1), 0 3px 3px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1), 0 3px 3px rgba(0, 0, 0, 0.1);
+  -o-box-shadow:0 2px 4px rgba(0, 0, 0, 0.1), 0 3px 3px rgba(0, 0, 0, 0.1); 
+}
+
+.userinfo-motto {
+  width: 70%;
+  display: inline-block;
+  position: relative;
+  left: 30rpx;
+  top: 15rpx;
+  font-size: 37rpx;
+  color:#B6CCE3;
+}
+
 .tile {
   position: absolute;
   display: block;
@@ -36,10 +124,9 @@
 }
 
 .comments-item {
-  width: 80%;
-  margin-left: 10%;
+  width: 81%;
+  margin: 5% 8% 5% 11%;
   display: block;
-  margin-top: 30rpx;
   -webkit-box-shadow:0 2px 4px rgba(0, 0, 0, 0.1), 0 3px 3px rgba(0, 0, 0, 0.1);
   -moz-box-shadow:0 2px 4px rgba(0, 0, 0, 0.1), 0 3px 3px rgba(0, 0, 0, 0.1);
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1), 0 3px 3px rgba(0, 0, 0, 0.1);
@@ -51,9 +138,8 @@
   display: block;
   min-height: 150rpx;
   /* border: 1px solid rgb(231, 231, 231); */
-  border-radius: 15% / 3%;
   padding: 10rpx 20rpx 10rpx 20rpx;
-  color: #DAE8FC;
+  color: #B6CCE3;
 }
 
 .comments-info {
@@ -75,4 +161,10 @@
   display: inline-block;
   float: right;
   margin: 26rpx 12rpx 0rpx 0rpx;
+}
+.comment-input {
+  color: gray;
+  background-color: white;
+  height: 200rpx;
+  width: 100%;
 }
