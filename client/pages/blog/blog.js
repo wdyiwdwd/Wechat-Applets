@@ -67,7 +67,64 @@ Page({
       })
     }
     else {
-    
+      var that = this;
+      wx.chooseImage({
+        count: 1,  //最多可以选择的图片总数  
+        sizeType: ['original'], // 可以指定是原图还是压缩图，默认二者都有  
+        sourceType: ['album'], // 可以指定来源是相册还是相机，默认二者都有  
+        success: function (res) {
+          // 返回选定照片的本地文件路径列表，tempFilePath可以作为img标签的src属性显示图片  
+          var tempFilePaths = res.tempFilePaths;
+          //启动上传等待中...  
+          wx.showToast({
+            title: '正在上传...',
+            icon: 'loading',
+            mask: true,
+            duration: 10000
+          })
+          var uploadImgCount = 0;
+          for (var i = 0, h = tempFilePaths.length; i < h; i++) {
+            console.log(tempFilePaths[i]);
+            wx.uploadFile({
+              url: config.host + '/uploadpicture',
+              filePath: tempFilePaths[i],
+              header: {
+                "Content-Type": "multipart/form-data"
+              },
+              formData: {
+                'groupid': that.data.groupid
+              },
+              name: 'uploadPicture',
+              success: function (res) {
+                uploadImgCount++;
+                //如果是最后一张,则隐藏等待中  
+                if (uploadImgCount == tempFilePaths.length) {
+                  wx.hideToast();
+                }
+                // to do
+                console.log(res.data);
+                that.setData({
+                  hasUpload: true,
+                  showCover: true,
+                  newPicture: JSON.parse(res.data),
+                  textFocus: true
+                })
+                console.log(that.data.newPicture);
+              },
+              fail: function (res) {
+                wx.hideToast();
+                console.log(res);
+                wx.showModal({
+                  title: '错误提示',
+                  content: '上传图片失败',
+                  showCancel: false,
+                  success: function (res) { }
+                })
+              }
+            });
+          }
+        }
+      });
     }
   },
   addRemark: function() {

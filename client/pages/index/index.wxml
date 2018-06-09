@@ -4,7 +4,7 @@
   <view class="userinfo card">
     <open-data type="userAvatarUrl" class="userinfo-avatar"></open-data>
     <open-data type="userNickName" class="userinfo-nickname"></open-data>
-    <text class="userinfo-motto">答题获取酒量等级</text>
+    <text class="userinfo-motto">酒量等级</text>
     <image src='{{"../static/01.png"}}' class="level-image"></image>
   </view>
   <swiper class="swiper card" indicator-dots="{{true}}" bindchange="swiperChange" indicator-color="#DAE8FC" indicator-active-color="#F8CECC">
