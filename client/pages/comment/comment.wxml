@@ -16,5 +16,6 @@
   </view>
   <view hidden="{{!showCover}}" class="add-view">
     <textarea placeholder="请输如您对这位酒友的评论：" focus='{{textFocus}}' class="comment-imput" bindinput="changeComment" bindconfirm='addComment' show-confirm-bar bindblur="addComment"/>
+    <button bindtap='addComment'>提交</button>
   </view>
 </view>

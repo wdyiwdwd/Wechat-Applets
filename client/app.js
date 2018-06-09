@@ -12,7 +12,7 @@ App({
     userInfo: {},
     scene: null
   },
-  onLaunch: function (options) {
+  onShow: function (options) {
     var that = this;
     that.globalData.scene=options.scene;
     // 登录

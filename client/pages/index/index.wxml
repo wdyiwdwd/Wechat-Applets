@@ -1,64 +1,82 @@
 <!--index.wxml-->
-<view class="container" wx:if="{{isFirst}}">
-  <view class="userinfo">
+<view class="all">
+<view wx:if="{{isFirst}}">
+  <view class="userinfo card">
     <open-data type="userAvatarUrl" class="userinfo-avatar"></open-data>
     <open-data type="userNickName" class="userinfo-nickname"></open-data>
+    <text class="userinfo-motto">答题获取酒量等级</text>
+    <image src='{{"../static/01.png"}}' class="level-image"></image>
   </view>
-  <swiper class="swiper" indicator-dots="{{true}}" bindchange="swiperChange">
+  <swiper class="swiper card" indicator-dots="{{true}}" bindchange="swiperChange" indicator-color="#DAE8FC" indicator-active-color="#F8CECC">
     <block wx:for="{{questions}}">
       <swiper-item>
-        <view class="initial">
           <text class="question">{{item.question}}</text>
           <radio-group class="answers" bindchange="radioChange">
-            <radio value="0">{{item.answers[0]}}</radio>
-            <radio value="1">{{item.answers[1]}}</radio>
-            <radio value="2">{{item.answers[2]}}</radio>
-            <radio value="3">{{item.answers[3]}}</radio>
+            <radio class="answer-item" value="0">{{item.answers[0]}}</radio>
+            <radio class="answer-item" value="1">{{item.answers[1]}}</radio>
+            <radio class="answer-item" value="2">{{item.answers[2]}}</radio>
+            <radio class="answer-item" value="3">{{item.answers[3]}}</radio>
           </radio-group>
-        </view>
       </swiper-item>
     </block>
   </swiper>
-  <view class="bottom">
-    <button wx:if="{{canIUse}}" open-type="getUserInfo" lang="zh_CN" bindgetuserinfo="bindGetUserInfo">完成自评</button>
+  <view class="tile">
+    <button class="button left-button" wx:if="{{canIUse}}" open-type="getUserInfo" lang="zh_CN" bindgetuserinfo="bindGetUserInfo">完成自评</button>
     <view wx:else>请升级微信版本</view>
-    <button bindtap='showDetail'>关于</button>
+    <button class="button right-button" bindtap='showDetail'>关于</button>
   </view>
 </view>
 <view wx:else>
-  <!-- <view wx:if="{{isFirst==null}}"></view> -->
-  <!-- <view wx:else> --><view>
-    <view class="userinfo">
+   <!-- <view wx:if="{{isFirst==null}}"></view>
+    <view class="user-card" wx:else> --><view>
+    <view class="userinfo card">
       <open-data type="userAvatarUrl" class="userinfo-avatar"></open-data>
       <open-data type="userNickName" class="userinfo-nickname"></open-data>
+      <text class="userinfo-motto">{{level}}</text>
+      <image src='{{"../static/0" + (levelNum + 1) + ".png"}}' class="level-image"></image>
+              <!-- <input placeholder="{{motto}}" focus="{{true}}" bindconfirm='updateMotto'/> -->
     </view>
-    <view wx:if="{{isEdited}}">
-      <text class="wineInfo">{{pickers[0].wine}}酒量</text>
-      <picker bindchange='bindPickerChange0' bindcancel='bindPickerCancel' value='{{pickers[0].index}}' range='{{pickers[0].array}}'>
-        <text class='wineInfo'>当前选择： {{pickers[0].array[pickers[0].index]}}</text>
+    <!-- <view class="card">
+        <image src='{{"../static/1" + 1 + ".png"}}' class="wine-img"></image>
+        <text class="userinfo-nickname">等级:</text>
+   
+    </view> -->
+    <view class="wines" wx:if="{{isEdited}}">
+      <!-- <text class="wineInfo">{{pickers[0].wine}}:</text> -->
+      <picker class="card wine-info" bindchange='bindPickerChange0' bindcancel='bindPickerCancel' value='{{pickers[0].index}}' range='{{pickers[0].array}}'>
+        <image src='{{"../static/1" + (choosedAnswer[0] + 1) + ".png"}}' class="wine-img"></image>
+        <text class="userinfo-nickname">{{pickers[0].wine}}:</text>
+        <text class="userinfo-motto">{{pickers[0].array[pickers[0].index]}}</text>
+        <view class="wine-change"></view>
       </picker>
-      <text class="wineInfo">{{pickers[1].wine}}酒量</text>
-      <picker bindchange='bindPickerChange1' bindcancel='bindPickerCancel' value='{{pickers[1].index}}' range='{{pickers[1].array}}'>
-        <text class='wineInfo'>当前选择： {{pickers[1].array[pickers[1].index]}}</text>
+      <!-- <text class="wineInfo">{{pickers[1].wine}}:</text> -->
+      <picker  class="card wine-info" bindchange='bindPickerChange1' bindcancel='bindPickerCancel' value='{{pickers[1].index}}' range='{{pickers[1].array}}'>
+        <image src='{{"../static/2" + (choosedAnswer[1] + 1) + ".png"}}' class="wine-img"></image>
+        <text class="userinfo-nickname">{{pickers[1].wine}}:</text>
+        <text  class="userinfo-motto">{{pickers[1].array[pickers[1].index]}}</text>
+        <view class="wine-change"></view>
       </picker>
-      <text class="wineInfo">{{pickers[2].wine}}酒量</text>
-      <picker bindchange='bindPickerChange2' bindcancel='bindPickerCancel' value='{{pickers[2].index}}' range='{{pickers[2].array}}'>
-        <text class='wineInfo'>当前选择： {{pickers[2].array[pickers[2].index]}}</text>
+      <!-- <text class="wineInfo">{{pickers[2].wine}}:</text> -->
+      <picker class="card wine-info" bindchange='bindPickerChange2' bindcancel='bindPickerCancel' value='{{pickers[2].index}}' range='{{pickers[2].array}}'>
+        <image src='{{"../static/3" + (choosedAnswer[2] + 1) + ".png"}}' class="wine-img"></image>
+        <text class="userinfo-nickname">{{pickers[2].wine}}:</text>
+        <text class="userinfo-motto">{{pickers[2].array[pickers[2].index]}}</text>
+        <view class="wine-change"></view>
       </picker>
     </view>
-    <view wx:else>
+    <view class="wines" wx:else>
       <block wx:for="{{displayAnswer}}">
-        <text class="wineInfo">{{item.wine}}酒量： {{item.answers}}</text>
+        <view class="card  wine-info">
+        <image src='{{"../static/" + (index+1) + "" + (choosedAnswer[index]+1) + ".png"}}' class="wine-img"></image>
+        <text class="userinfo-nickname">{{item.wine}}:</text>
+        <text class="userinfo-motto"> {{item.answers}}</text>
+        </view>
       </block>
-      <view class="motto">
-        <input placeholder="{{motto}}" focus="{{true}}" bindconfirm='updateMotto'/>
-      </view>
-      <text class="wineInfo">酒量等级： {{level}}</text>
     </view>
-    <button bindtap='edit'>{{editButton}}</button>
-    <button open-type="share">转发到群</button>
-    <button bindtap='goBlog'>去照片</button>
-    <button bindtap='goList'>去群里</button>
-    <button bindtap='goComment'>去评论</button>
+    <view class="tile">
+    <button class="button left-button" bindtap='edit'>{{editButton}}</button>
+    <button class="button right-button" open-type="share">转发到群</button>
+    </view>
   </view>
+</view>
 </view>

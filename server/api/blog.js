@@ -36,14 +36,17 @@ exports.uploadPicture = async function(req, res) {
   form.keepExtensions = true;     //保留后缀
   form.maxFieldsSize = 2 * 1024 * 1024;   //文件大小
 
-  form.parse(req, function (err, fields, files) {
+  fs.exists(form.uploadDir, function (exists) {
+    if (!exists) fs.mkdirSync(form.uploadDir);
+  })
 
+  form.parse(req, function (err, fields, files) {
     if (err) {
       res.locals.error = err;
       res.send("表单错误！");
       return;
     }
-    console.log(files);
+    console.log(files.uploadPicture.path);
     console.log(fields);
     //图片写入地址；
     var newPath = form.uploadDir + fields.groupid + '/';

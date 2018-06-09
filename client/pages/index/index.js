@@ -20,19 +20,20 @@ Page({
     displayAnswer: [],
     level: null,
     editButton: '修改酒量',
+    levelNum: 1,
     pickers: [
       {
-        index: 0,
+        index: null,
         wine: consts.questions[0].wine,
         array: consts.questions[0].answers
       },
       {
-        index: 0,
+        index: null,
         wine: consts.questions[1].wine,
         array: consts.questions[1].answers
       },
       {
-        index: 0,
+        index: null,
         wine: consts.questions[2].wine,
         array: consts.questions[2].answers
       }
@@ -138,6 +139,7 @@ Page({
     this.data.choosedAnswer[this.data.current]=+e.detail.value;
     this.data.pickers[this.data.current].index=+e.detail.value;
     this.setData({
+      levelNum: Math.max.apply(null, that.data.choosedAnswer),
       choosedAnswer: that.data.choosedAnswer,
       pickers: that.data.pickers
     })
@@ -269,6 +271,7 @@ Page({
     this.data.choosedAnswer[index] = +e.detail.value;
     this.data.pickers[index].index = +e.detail.value;
     this.setData({
+      levelNum: Math.max.apply(null, that.data.choosedAnswer),
       choosedAnswer: that.data.choosedAnswer,
       pickers: that.data.pickers
     })
@@ -316,9 +319,11 @@ Page({
           that.data.pickers[i].index = data[i];
         }
         that.setData({
+          levelNum: Math.max.apply(null, data),
           choosedAnswer: data,
           pickers: that.data.pickers
         })
+        console.log(that.data.levelNum);
       });
     }
   },

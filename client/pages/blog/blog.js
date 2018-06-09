@@ -12,7 +12,7 @@ Page({
     hasUpload: false,
     newPicture: {},
     remark: '',
-    textFocus: false,
+    textFocus: false
   },
   onLoad: function () {
     var that = this;
@@ -81,6 +81,7 @@ Page({
                 wx.hideToast();
               }
               // to do
+              console.log(res.data);
               that.setData({
                 hasUpload: true,
                 showCover: true,
@@ -127,6 +128,7 @@ Page({
         success: function (res) {
           console.log(res.data)
           res.data.createdAt = utils.formatDBTime(res.data.createdAt)
+          res.data.path = config.host + res.data.path
           that.data.pictures.splice(0, 0, res.data);
           that.setData({
             pictures: that.data.pictures,

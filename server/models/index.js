@@ -11,6 +11,12 @@ var sequelize = new Sequelize('mysql://localhost:3306/database', {})
 exports.DB = new Sequelize(db.database, db.user, db.password, {
   host: db.host, // 数据库地址
   dialect: db.dialect, // 指定连接的数据库类型
+  dialectOptions: {
+    charset: "utf8mb4",
+    collate: "utf8mb4_unicode_ci",
+    supportBigNumbers: true,
+    bigNumberStrings: true
+  },
   pool: db.pool
 });
 

@@ -3,10 +3,10 @@
 	"packOptions": {
 		"ignore": []
 	},
-  "client": "./client",
-  "svr": "./server",
-  "miniprogramRoot": "./client",
-  "qcloudRoot": "./server",
+	"client": "./client",
+	"svr": "./server",
+	"miniprogramRoot": "./client",
+	"qcloudRoot": "./server",
 	"setting": {
 		"urlCheck": false,
 		"es6": true,
@@ -48,7 +48,7 @@
 					"shareInfo": {
 						"groupName": "测试模拟群0",
 						"shareName": "DxHX5ze3GYvP6AhYKZZVKKketA6bwnE1_JnH0kOtuNU@cr4dev",
-						"shareKey": "dKS28by4mtkC6mMF-IM0Dl70rFqwuERIiW5FUYciFc7RYJDSBE6rA9oViyDcVzN1L0Ve56gshoV-ETnT1I_yTg~~"
+						"shareKey": "T-bkom3aa1NnsbwaEEh0rb5YnX-fJ_Iyjte9unRryOlo4M1_lwDVfKyPWE0Vibh8Dgjhq07uhfLwCzYLr1_bjw~~"
 					}
 				}
 			]
