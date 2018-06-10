@@ -10,6 +10,7 @@ var group = require('./api/group');
 var user = require('./api/user');
 var wine = require('./api/wine');
 var joinGroup = require('./api/joinGroup');
+var wx = require('./api/wx');
 var router = express.Router();
 
 router.get('/', test.testapi);
@@ -33,5 +34,7 @@ router.post('/uploadpicture', blog.uploadPicture)
 router.post('/addremark', blog.addRemark)
 
 router.post('/addcomment', comment.addComment)
+
+router.post('/getopenid', wx.getOpenid)
 
 module.exports = router;

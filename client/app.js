@@ -19,12 +19,17 @@ App({
     wx.login({
       success: function(res) {
         if(res.code) {
-          var apiurl = 'https://api.weixin.qq.com/sns/jscode2session?appid=' + that.globalData.appid + '&secret=' + that.globalData.secret + '&js_code=' + res.code + '&grant_type=authorization_code';
+          // var apiurl = 'https://api.weixin.qq.com/sns/jscode2session?appid=' + that.globalData.appid + '&secret=' + that.globalData.secret + '&js_code=' + res.code + '&grant_type=authorization_code';
           // 获取openid
           wx.request({
-            url: apiurl,
+            url: config.host + '/getopenid',
+            data: {
+              code: res.code,
+            },
+            method: 'POST',
+            dataType: 'json',
             success: function(res) {
-              console.log(res.data);
+              console.log("openid", res.data);
               that.globalData.openid = res.data.openid;
               that.globalData.sessionKey = res.data.session_key;
               console.log(that.globalData.openid);

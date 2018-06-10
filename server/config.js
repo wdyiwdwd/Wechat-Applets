@@ -51,6 +51,9 @@ var config = {
     url: '/upload/'
   },
 
+  appid: 'wxb7be4acbca4aa702',
+  secret: '783aa7596ce1e457cf77c5b3e8ec81fe',
+
   file_limit: '1MB',
 
 
