@@ -54,7 +54,7 @@ Page({
     if (app.globalData.isFirst === true) {
       wx.showModal({
         title: '提示',
-        content: '请先完成自评，再和您的群友一同分享吧~',
+        content: '请先完成酒量自估，再和您的群友一同分享吧~',
         success: function (res) {
           if (res.confirm) {
             wx.navigateTo({

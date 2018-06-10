@@ -1,5 +1,4 @@
 var express = require('express');
-var test = require('./api/testapi');
 var selfInitial = require('./api/selfInitial');
 var isFirst = require('./api/isFirst');
 var getGid = require('./api/getGid');
@@ -13,7 +12,6 @@ var joinGroup = require('./api/joinGroup');
 var wx = require('./api/wx');
 var router = express.Router();
 
-router.get('/', test.testapi);
 router.get('/selfInitial', selfInitial.selfInitial);
 router.get('/isFirst', isFirst.isFirst);
 router.get('/getGid', getGid.getGid);

@@ -1,6 +1,6 @@
 /**index.wxss**/
 .all {
-  padding-top: 40rpx;
+  padding-top: 30rpx;
 }
 
 .question {

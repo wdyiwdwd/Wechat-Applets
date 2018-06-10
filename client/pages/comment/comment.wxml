@@ -1,4 +1,4 @@
-<view>
+<view class="all">
   <scroll-view scroll-y="true" class="scroll">
   <view class="userinfo card">
     <image src='{{theUser.avatar}}' class="userinfo-avatar"></image>

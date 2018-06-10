@@ -39,12 +39,6 @@ Page({
       }
     ]
   },
-  // 事件处理函数
-  bindViewTap: function() {
-    wx.navigateTo({
-      url: '../logs/logs'
-    })
-  },
   // 判断是否初次使用
   onShow: function () {
     var that = this;
@@ -73,9 +67,9 @@ Page({
   // 转发响应，获取目标群id
   onShareAppMessage: function(res) {
     return {
-      //title:
+      // title: '大家的酒量',
       path: '/pages/list/list',
-      //imageUrl:
+      // imageUrl: '../static/logo54.png',
       success: function(res) {
         console.log(res.shareTickets[0]);
         wx.getShareInfo({
@@ -340,7 +334,7 @@ Page({
   showDetail: function() {
     wx.showModal({
       title: '大家的酒量',
-      content: '\t“大家的酒量”是一款记录群成员酒量并可以上传酒局照片纪实的健康饮酒管理小程序，旨在让群成员之间了解相互的酒量并进行监督，避免劝酒不当、饮酒过量的状况。',
+      content: '“大家的酒量”是一款记录群成员酒量并可以上传酒局照片纪实的健康饮酒管理小程序，旨在让群成员之间了解相互的酒量并进行监督，避免劝酒不当、饮酒过量的状况。',
       showCancel: false
     })
   }

@@ -1,3 +1,7 @@
+.all {
+  padding-top: 20rpx; 
+}
+
 .wines{
   margin: 4% 10% 5% 10%;
   width: 80%;

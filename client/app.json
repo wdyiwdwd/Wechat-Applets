@@ -3,13 +3,12 @@
     "pages/index/index",
     "pages/list/list",
     "pages/blog/blog",
-    "pages/logs/logs",
     "pages/comment/comment"
   ],
   "window":{
     "backgroundTextStyle":"light",
     "navigationBarBackgroundColor": "#fff",
-    "navigationBarTitleText": "WeChat",
+    "navigationBarTitleText": "大家的酒量",
     "navigationBarTextStyle":"black"
   }
 }
