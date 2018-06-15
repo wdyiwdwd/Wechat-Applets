@@ -11,7 +11,7 @@ Page({
     ],
   },
   onShow: function () {
-    console.log(app.globalData.openGId);
+    //console.log(app.globalData.openGId);
     var that = this;
     this.setData({
       openid: app.globalData.openid,
@@ -27,7 +27,7 @@ Page({
         method: 'GET',
         dataType: 'json',
         success: function (res) {
-          console.log(res.data);
+          //console.log(res.data);
           that.setData({
             group: res.data
           })
@@ -44,7 +44,7 @@ Page({
           method: 'GET',
           dataType: 'json',
           success: function (res) {
-            console.log(res.data);
+            //console.log(res.data);
             that.setData({
               group: res.data
             })
@@ -65,20 +65,23 @@ Page({
     })
   },
   lookDetail: function (e) {
-    console.log(e);
+    //console.log(e);
     var index = e.currentTarget.dataset.index;
-    console.log(e.currentTarget.dataset.index)
-    console.log(this.data.openid)
-    console.log(this.data.group[index].wxid)
-    if(this.data.openid === this.data.group[index].wxid) {
-      wx.navigateTo({
-        url: '../index/index',
-      })
-    }
-    else {
-      wx.navigateTo({
-        url: '../comment/comment?toid=' + this.data.group[index].wxid,
-      })
-    }
+    //console.log(e.currentTarget.dataset.index)
+    //console.log(this.data.openid)
+    //console.log(this.data.group[index].wxid)
+    wx.navigateTo({
+      url: '../comment/comment?toid=' + this.data.group[index].wxid,
+    })
+    // if(this.data.openid === this.data.group[index].wxid) {
+    //   wx.navigateTo({
+    //     url: '../index/index',
+    //   })
+    // }
+    // else {
+    //   wx.navigateTo({
+    //     url: '../comment/comment?toid=' + this.data.group[index].wxid,
+    //   })
+    // }
   }
 })

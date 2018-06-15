@@ -66,6 +66,9 @@
   color: #F8CECC;
   font-size: 40rpx;
   width: 50%;
+  height: 50rpx;
+  /* border: 1px solid red; */
+  overflow: hidden;
 }
 
 .card {

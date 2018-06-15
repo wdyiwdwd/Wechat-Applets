@@ -11,6 +11,8 @@ var Picture = db.define('picture', {
   },
   text: {
     type: Sequelize.TEXT,
+    allowNull: false,
+    defaultValue: '',
   },
 }, {
     // 如果为 true 则表的名称和 model 相同，即 user

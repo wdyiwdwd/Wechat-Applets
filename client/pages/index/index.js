@@ -71,11 +71,11 @@ Page({
       path: '/pages/list/list',
       // imageUrl: '../static/logo54.png',
       success: function(res) {
-        console.log(res.shareTickets[0]);
+        //console.log(res.shareTickets[0]);
         wx.getShareInfo({
           shareTicket: res.shareTickets[0],
           success: function (res) {
-            console.log(res);
+            //console.log(res);
             var temp = res;
             // 解密
             wx.request({
@@ -87,7 +87,7 @@ Page({
                 iv: temp.iv
               },
               success: function (res) {
-                console.log(res.data);
+                //console.log(res.data);
                 app.globalData.openGId = res.data.openGId;
                 // 群关系插入数据库
                 wx.request({
@@ -121,7 +121,7 @@ Page({
   },
 
   swiperChange: function(e) {
-    console.log(e.detail.current);
+    //console.log(e.detail.current);
     this.setData({
       current: e.detail.current
     })
@@ -129,7 +129,7 @@ Page({
 
   radioChange: function(e) {
     var that=this;
-    console.log(this.data.current);
+    //console.log(this.data.current);
     this.data.choosedAnswer[this.data.current]=+e.detail.value;
     this.data.pickers[this.data.current].index=+e.detail.value;
     this.setData({
@@ -137,8 +137,8 @@ Page({
       choosedAnswer: that.data.choosedAnswer,
       pickers: that.data.pickers
     })
-    console.log(this.data.choosedAnswer);
-    console.log(this.data.pickers);
+    //console.log(this.data.choosedAnswer);
+    //console.log(this.data.pickers);
   },
 
   selfDone: function () {
@@ -192,7 +192,7 @@ Page({
 
   bindGetUserInfo: function(e) {
     var that=this;
-    console.log(e);
+    //console.log(e);
     if(e.detail.userInfo) {
       app.globalData.userInfo = e.detail.userInfo;
       that.setData({
@@ -279,8 +279,8 @@ Page({
       choosedAnswer: that.data.choosedAnswer,
       pickers: that.data.pickers
     })
-    console.log(this.data.choosedAnswer);
-    console.log(this.data.pickers);
+    //console.log(this.data.choosedAnswer);
+    //console.log(this.data.pickers);
   },
 
   bindPickerChange0: function(e) {
@@ -327,7 +327,7 @@ Page({
           choosedAnswer: data,
           pickers: that.data.pickers
         })
-        console.log(that.data.levelNum);
+        //console.log(that.data.levelNum);
       });
     }
   },

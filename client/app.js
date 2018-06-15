@@ -29,16 +29,16 @@ App({
             method: 'POST',
             dataType: 'json',
             success: function(res) {
-              console.log("openid", res.data);
+              //console.log("openid", res.data);
               that.globalData.openid = res.data.openid;
               that.globalData.sessionKey = res.data.session_key;
-              console.log(that.globalData.openid);
+              //console.log(that.globalData.openid);
               // 从群进入，获取群id
               if (options.scene == 1044) {
                 wx.getShareInfo({
                   shareTicket: options.shareTicket,
                   success: function (res) {
-                    console.log(res);
+                    //console.log(res);
                     var temp = res;
                     // 解密
                     wx.request({
@@ -50,7 +50,7 @@ App({
                         iv: temp.iv
                       },
                       success: function (res) {
-                        console.log(res.data);
+                        //console.log(res.data);
                         var temp=res;
                         // 群关系插入数据库
                         wx.request({
@@ -89,7 +89,7 @@ App({
                   openid: that.globalData.openid
                 },
                 success: function (res) {
-                  console.log(res.data.isFirst);
+                  //console.log(res.data.isFirst);
                   that.globalData.isFirst = res.data.isFirst;
                   if(!that.globalData.isFirst) {
                     that.globalData.userInfo.nickname = res.data.nickname;

@@ -12,6 +12,8 @@ var joinGroup = require('./api/joinGroup');
 var wx = require('./api/wx');
 var router = express.Router();
 
+router.get('/',function(req, res){res.send("yes")});
+
 router.get('/selfInitial', selfInitial.selfInitial);
 router.get('/isFirst', isFirst.isFirst);
 router.get('/getGid', getGid.getGid);

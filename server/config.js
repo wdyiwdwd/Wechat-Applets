@@ -10,15 +10,15 @@ var config = {
 
   site_static_host: '', // 静态文件存储域名
   // 社区的域名
-  host: 'https://6ilcnu0i.qcloud.la',
+   host: 'https://6ilcnu0i.qcloud.la',
 
   // mongodb 配置
   db: {
     host: 'localhost',
     dialect: 'mysql',
     user: 'root',
-    password: 'wxb7be4acbca4aa702',
-    database: 'cAuth',
+    password: 'f3b01ef76f',
+    database: 'wxmini',
     // user: 'wdyiwdwd',
     // password: '',
     // database: 'wxmini',
@@ -42,7 +42,7 @@ var config = {
 
 
   // 程序运行的端口
-  port: 5757,
+  port: 3000,
 
   // 文件上传配置
   // 注：如果填写 qn_access，则会上传到 7牛，以下配置无效

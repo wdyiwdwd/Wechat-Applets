@@ -54,7 +54,7 @@ Page({
         that.setData({
           theUser: res.data
         });
-        console.log(res.data)
+        //console.log(res.data)
       },
       fail: function (res) { }
     });
@@ -78,7 +78,7 @@ Page({
         that.setData({
           comments: res.data
         })
-        console.log(that.data.comments);
+        //console.log(that.data.comments);
       },
       fail: function (res) { },
     })

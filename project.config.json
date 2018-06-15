@@ -8,7 +8,7 @@
 	"miniprogramRoot": "./client",
 	"qcloudRoot": "./server",
 	"setting": {
-		"urlCheck": false,
+		"urlCheck": true,
 		"es6": true,
 		"postcss": true,
 		"minified": true,
@@ -37,18 +37,30 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 0,
+			"current": 1,
 			"list": [
 				{
 					"id": 0,
 					"name": "群",
-					"pathName": "pages/index/index",
+					"pathName": "pages/list/list",
 					"query": "",
 					"scene": "1044",
 					"shareInfo": {
 						"groupName": "测试模拟群0",
 						"shareName": "DxHX5ze3GYvP6AhYKZZVKKketA6bwnE1_JnH0kOtuNU@cr4dev",
 						"shareKey": "T-bkom3aa1NnsbwaEEh0rb5YnX-fJ_Iyjte9unRryOlo4M1_lwDVfKyPWE0Vibh8Dgjhq07uhfLwCzYLr1_bjw~~"
+					}
+				},
+				{
+					"id": -1,
+					"name": "群",
+					"pathName": "pages/list/list",
+					"query": "",
+					"scene": "1044",
+					"shareInfo": {
+						"groupName": "测试模拟群0",
+						"shareName": "DxHX5ze3GYvP6AhYKZZVKKketA6bwnE1_JnH0kOtuNU@cr4dev",
+						"shareKey": "kgCAFDatVNF11bVoWpFe6g3OkbYiL72pEUGKC1r43G1f9-2VoebUrJRu72bnWF0UqnANYw9SCkyPA42xCfE-cg~~"
 					}
 				}
 			]

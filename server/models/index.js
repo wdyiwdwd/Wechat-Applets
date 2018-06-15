@@ -22,7 +22,6 @@ exports.DB = new Sequelize(db.database, db.user, db.password, {
 
 console.log('database connection')
 
-exports.Test = require('./testdb')
 exports.User = require('./user')
 exports.Group = require('./group')
 exports.GroupUser = require('./group_user.js')

@@ -26,7 +26,7 @@ Page({
       data: {groupid: that.data.groupid},
       method: 'get',
       success: function (res) {
-        console.log(res.data)
+        //console.log(res.data)
         res.data.forEach(function(item) {
           item.path = config.host + item.path
           item.createdAt = utils.formatDBTime(item.createdAt)
@@ -84,7 +84,7 @@ Page({
           })
           var uploadImgCount = 0;
           for (var i = 0, h = tempFilePaths.length; i < h; i++) {
-            console.log(tempFilePaths[i]);
+            //console.log(tempFilePaths[i]);
             wx.uploadFile({
               url: config.host + '/uploadpicture',
               filePath: tempFilePaths[i],
@@ -102,18 +102,26 @@ Page({
                   wx.hideToast();
                 }
                 // to do
-                console.log(res.data);
+
+                console.log("success upload");
+                res.data = JSON.parse(res.data)
+                res.data.createdAt = utils.formatDBTime(res.data.createdAt);
+                res.data.path = config.host + res.data.path;
+                res.data.text = '';
+                that.data.pictures.splice(0, 0, res.data);
+                //console.log(res.data);
                 that.setData({
+                  pictures: that.data.pictures,
                   hasUpload: true,
                   showCover: true,
-                  newPicture: JSON.parse(res.data),
+                  newPicture: res.data,
                   textFocus: true
                 })
-                console.log(that.data.newPicture);
+                //console.log(that.data.newPicture);
               },
               fail: function (res) {
                 wx.hideToast();
-                console.log(res);
+                //console.log(res);
                 wx.showModal({
                   title: '错误提示',
                   content: '上传图片失败',
@@ -138,7 +146,7 @@ Page({
       })
     }
     else {
-      console.log(that.data.newPicture);
+      //console.log(that.data.newPicture);
       wx.request({
         url: config.host + '/addremark',
         dataType: 'json',
@@ -148,10 +156,11 @@ Page({
         },
         method: 'post',
         success: function (res) {
-          console.log(res.data)
+          //console.log(res.data)
           res.data.createdAt = utils.formatDBTime(res.data.createdAt)
           res.data.path = config.host + res.data.path
-          that.data.pictures.splice(0, 0, res.data);
+          // that.data.pictures.splice(0, 0, res.data);
+          that.data.pictures[0] = res.data;
           that.setData({
             pictures: that.data.pictures,
             remark: '',
